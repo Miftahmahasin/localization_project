@@ -1,0 +1,13 @@
+[KICKOFF] seeded at (-2.46, 0.00, -0 deg); now CONTINUOUS walking
+   turn-sign calibrated: +angle -> CCW (+yaw)
+   -> menuju (1.0, -1.5)
+   di (-2.48, 0.00, 5°) paruh sendiri | target(1.0,-1.5) d=3.8m
+   di (-2.40, -0.01, -20°) paruh sendiri | target(1.0,-1.5) d=3.7m
+   di (-2.31, -0.06, -25°) paruh sendiri | target(1.0,-1.5) d=3.6m
+   di (-2.25, -0.10, -25°) paruh sendiri | target(1.0,-1.5) d=3.5m
+   di (-2.17, -0.12, -28°) paruh sendiri | target(1.0,-1.5) d=3.4m
+   -> menuju (0.6, -1.3)  [paruh lawan sayap-]
+   di (-2.10, -0.16, -21°) paruh sendiri | target(0.6,-1.3) d=2.9m
+   di (-2.01, -0.19, -22°) paruh sendiri | target(0.6,-1.3) d=2.8m
+
+match_demo2 done (walked 41 s).

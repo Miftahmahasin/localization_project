@@ -1,0 +1,26 @@
+[T] seed (-2.5,0,0)
+[INFO] [1787551230.891498627] [seed_side]: seed 10/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[E] eval -> p3_1.csv (55s)
+[FALL] /fall=true (gt_yaw before=0.0)
+[K] teleport-rotate 180
+    polling GT rotation...
+     gt_yaw=
+     gt_yaw=
+     gt_yaw=0.0
+     gt_yaw=
+     gt_yaw=
+     gt_yaw=
+     gt_yaw=
+     gt_yaw=
+     gt_yaw=
+     gt_yaw=
+     gt_yaw=
+     gt_yaw=
+     gt_yaw=0.0
+     gt_yaw=
+     gt_yaw=
+[RECOVER] /fall=false (gt_yaw now=0.0) -> heading-uncertain reset + WALK
+[INFO] [1787551327.577914583] [walk_op3]: -> stop
+[INFO] [1787551328.087103116] [walk_op3]: STOP sent.
+    walk done; logging tail ...
+[done]

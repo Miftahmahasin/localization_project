@@ -1,0 +1,19 @@
+###### A run 1/3 ######
+###### A run 2/3 ######
+###### A run 3/3 ######
+===== A aggregate (3 runs, gaze ON) =====
+  ballA1.csv: n=440  pos RMSE=0.121 m  median=0.096  p95=0.221  yaw RMSE=3.09 deg
+       RAW fix vs GT: n=435  RMSE=0.166 m  median=0.128  p95=0.314
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  ballA2.csv: n=440  pos RMSE=0.163 m  median=0.094  p95=0.296  yaw RMSE=1.41 deg
+       RAW fix vs GT: n=439  RMSE=0.206 m  median=0.198  p95=0.347
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  ballA3.csv: n=432  pos RMSE=0.170 m  median=0.163  p95=0.269  yaw RMSE=2.15 deg
+       RAW fix vs GT: n=430  RMSE=0.177 m  median=0.126  p95=0.355
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  pos RMSE [m]      0.152±0.022         0.121     0.170
+  yaw RMSE [deg]    2.218±0.684         1.414     3.086
+  median [m]        0.118±0.032         0.094     0.163
+  p95 [m]           0.262±0.031         0.221     0.296
+  mirror [%]        0.0±0.0             0.000     0.000
+  side flips [#]    0.0±0.0                 0         0

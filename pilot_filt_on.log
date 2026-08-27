@@ -1,0 +1,107 @@
+[H] set /degrade_relay filter_classes = [0,1,2]
+Set parameter successful
+[H] eval point 'filt_on' (2 run, walk=60s) ...
+== precheck: is the localization stack up? ==
+   OK. eval window per run = 77.0s ; runs = 2 ; prefix = filt_on
+
+############################################################
+# RUN 1/2  ->  filt_on1.csv
+############################################################
+[T2] teleport -> (-2.5, 0.0, 0.0 deg)
+     settle 3.0s ...
+[T2] seed (reliable, x6) ...
+[INFO] [1787531362.756698373] [seed_side]: seed 1/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=1
+[INFO] [1787531363.068532179] [seed_side]: seed 2/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=1
+[INFO] [1787531363.383880682] [seed_side]: seed 3/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787531363.697062574] [seed_side]: seed 4/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787531364.068106425] [seed_side]: seed 5/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787531364.379834142] [seed_side]: seed 6/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787531364.691388887] [seed_side]: seed 7/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787531365.002982012] [seed_side]: seed 8/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787531365.314795113] [seed_side]: seed 9/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787531365.627018995] [seed_side]: seed 10/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+     settle 2.0s (EKF reset + ref commit) ...
+[T3] eval -> filt_on1.csv (dur 77.0s)
+[INFO] [1787531368.374241430] [landmark_eval]: logging -> filt_on1.csv (dur=77s)
+[T4] walk (x=0.012, angle=0.0, 60s) ...
+[INFO] [1787531369.248584129] [walk_op3]: -> walking_module
+[INFO] [1787531371.280163739] [walk_op3]: -> set_params x=0.012 y=0.000 angle=0.0deg (period=650ms, hip_pitch=5.0deg)
+[INFO] [1787531371.781647304] [walk_op3]: -> start
+[INFO] [1787531371.986139045] [walk_op3]: WALKING for 60 s (Ctrl-C to stop early)…
+[INFO] [1787531432.035906902] [walk_op3]: -> stop
+[INFO] [1787531432.542477898] [walk_op3]: STOP sent.
+     walk done; waiting for eval to finish ...
+
+=== live run summary ===
+  filt_on1.csv: n=771  pos RMSE=0.090 m  median=0.077  p95=0.125  yaw RMSE=0.46 deg
+       time-to-converge(<0.30m for 3s)=0.2 s
+       RAW fix vs GT: n=770  RMSE=0.090 m  median=0.078  p95=0.128
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  fixes: full=693 single=17  (9.2/s)  longest fix-less gap=0.30 s
+     inter-run gap 4.0s ...
+
+############################################################
+# RUN 2/2  ->  filt_on2.csv
+############################################################
+[T2] teleport -> (-2.5, 0.0, 0.0 deg)
+     settle 3.0s ...
+[T2] seed (reliable, x6) ...
+[INFO] [1787531455.550010256] [seed_side]: seed 1/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=1
+[INFO] [1787531455.861514712] [seed_side]: seed 2/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787531456.173620745] [seed_side]: seed 3/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787531456.485468332] [seed_side]: seed 4/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787531456.797015239] [seed_side]: seed 5/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787531457.109257552] [seed_side]: seed 6/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787531457.422829873] [seed_side]: seed 7/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787531457.735566022] [seed_side]: seed 8/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787531458.048033228] [seed_side]: seed 9/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787531458.360334933] [seed_side]: seed 10/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+     settle 2.0s (EKF reset + ref commit) ...
+[T3] eval -> filt_on2.csv (dur 77.0s)
+[INFO] [1787531461.512804304] [landmark_eval]: logging -> filt_on2.csv (dur=77s)
+[T4] walk (x=0.012, angle=0.0, 60s) ...
+[INFO] [1787531461.965916930] [walk_op3]: -> walking_module
+[INFO] [1787531463.986528158] [walk_op3]: -> set_params x=0.012 y=0.000 angle=0.0deg (period=650ms, hip_pitch=5.0deg)
+[INFO] [1787531464.487883149] [walk_op3]: -> start
+[INFO] [1787531464.693064887] [walk_op3]: WALKING for 60 s (Ctrl-C to stop early)…
+[INFO] [1787531524.783943081] [walk_op3]: -> stop
+[INFO] [1787531525.291731530] [walk_op3]: STOP sent.
+     walk done; waiting for eval to finish ...
+
+=== live run summary ===
+  filt_on2.csv: n=771  pos RMSE=0.110 m  median=0.035  p95=0.103  yaw RMSE=0.15 deg
+       time-to-converge(<0.30m for 3s)=1.9 s
+       RAW fix vs GT: n=763  RMSE=0.078 m  median=0.034  p95=0.090
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  fixes: full=587 single=25  (8.0/s)  longest fix-less gap=0.33 s
+
+############################################################
+# AGGREGATE
+############################################################
+
+##########################################################################
+# seeded_B2  (2 runs)
+##########################################################################
+  filt_on1.csv: n=771  pos RMSE=0.090 m  median=0.077  p95=0.125  yaw RMSE=0.46 deg
+       time-to-converge(<0.30m for 3s)=0.2 s
+       RAW fix vs GT: n=770  RMSE=0.090 m  median=0.078  p95=0.128
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  filt_on2.csv: n=771  pos RMSE=0.110 m  median=0.035  p95=0.103  yaw RMSE=0.15 deg
+       time-to-converge(<0.30m for 3s)=1.9 s
+       RAW fix vs GT: n=763  RMSE=0.078 m  median=0.034  p95=0.090
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+
+==========================================================================
+SCENARIO: seeded_B2   (n_runs=2)
+==========================================================================
+  metric            mean±std              min       max
+  ------------------------------------------------------
+  pos RMSE [m]      0.100±0.010         0.090     0.110
+  yaw RMSE [deg]    0.304±0.154         0.150     0.458
+  median [m]        0.056±0.021         0.035     0.077
+  p95 [m]           0.114±0.011         0.103     0.125
+  converge [s]      1.0±0.8             0.215     1.853   [2/2 runs converged]
+  mirror [%]        0.0±0.0             0.000     0.000
+  side flips [#]    0.0±0.0                 0         0
+
+done. CSVs: filt_on1.csv filt_on2.csv

@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OP3 Localization — Claude Code Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap');
+
+  :root {
+    --bg: #0d1117;
+    --bg2: #161b22;
+    --bg3: #21262d;
+    --border: #30363d;
+    --text: #e6edf3;
+    --text2: #8b949e;
+    --text3: #6e7681;
+    --green: #3fb950;
+    --green-dim: #1a3a24;
+    --blue: #58a6ff;
+    --blue-dim: #0d2033;
+    --yellow: #d29922;
+    --yellow-dim: #2d2006;
+    --red: #f85149;
+    --red-dim: #2d0f0f;
+    --purple: #bc8cff;
+    --purple-dim: #1d1040;
+    --orange: #e3b341;
+    --mono: 'IBM Plex Mono', monospace;
+    --sans: 'IBM Plex Sans', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* Layout */
+  .layout { display: flex; min-height: 100vh; }
+
+  nav {
+    width: 240px;
+    min-width: 240px;
+    background: var(--bg2);
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
+    flex-shrink: 0;
+  }
+
+  nav .logo {
+    padding: 0 20px 20px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+  nav .logo .robot { font-size: 28px; margin-bottom: 4px; }
+  nav .logo h1 { font-size: 13px; font-weight: 600; color: var(--text); letter-spacing: 0.05em; }
+  nav .logo p  { font-size: 11px; color: var(--text3); margin-top: 2px; }
+
+  nav a {
+    display: block;
+    padding: 6px 20px;
+    color: var(--text2);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.15s, background 0.15s;
+    border-left: 2px solid transparent;
+  }
+  nav a:hover { color: var(--text); background: var(--bg3); }
+  nav a.active { color: var(--blue); border-left-color: var(--blue); background: var(--blue-dim); }
+  nav .section-label {
+    padding: 16px 20px 4px;
+    font-size: 10px;
+    font-weight: 600;
+    color: var(--text3);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  main {
+    flex: 1;
+    padding: 40px 48px;
+    max-width: 900px;
+  }
+
+  /* Sections */
+  section { margin-bottom: 56px; scroll-margin-top: 20px; }
+
+  h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 16px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  h2 .icon { font-size: 18px; }
+
+  h3 {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    margin: 24px 0 10px;
+  }
+
+  p { color: var(--text2); margin-bottom: 12px; line-height: 1.7; }
+
+  /* Code blocks */
+  pre {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 16px;
+    overflow-x: auto;
+    margin: 12px 0;
+    position: relative;
+  }
+  code {
+    font-family: var(--mono);
+    font-size: 13px;
+    color: var(--text);
+  }
+  pre code { color: var(--text); }
+  .inline-code {
+    font-family: var(--mono);
+    font-size: 12px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    padding: 1px 5px;
+    color: var(--purple);
+  }
+
+  /* Comment in code */
+  .cm { color: var(--text3); }
+  .kw { color: var(--blue); }
+  .st { color: var(--green); }
+  .nu { color: var(--purple); }
+
+  /* Cards */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin: 12px 0;
+  }
+  .card-title {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+
+  /* Status badges */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+    font-family: var(--mono);
+  }
+  .badge-green  { background: var(--green-dim);  color: var(--green);  border: 1px solid var(--green); }
+  .badge-yellow { background: var(--yellow-dim); color: var(--yellow); border: 1px solid var(--yellow); }
+  .badge-red    { background: var(--red-dim);    color: var(--red);    border: 1px solid var(--red); }
+  .badge-blue   { background: var(--blue-dim);   color: var(--blue);   border: 1px solid var(--blue); }
+  .badge-purple { background: var(--purple-dim); color: var(--purple); border: 1px solid var(--purple); }
+
+  /* Pipeline diagram */
+  .pipeline {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin: 16px 0;
+  }
+  .pipe-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .pipe-time {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    width: 28px;
+    text-align: right;
+    flex-shrink: 0;
+  }
+  .pipe-node {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 4px 10px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text);
+  }
+  .pipe-node.green  { border-color: var(--green);  color: var(--green);  background: var(--green-dim); }
+  .pipe-node.blue   { border-color: var(--blue);   color: var(--blue);   background: var(--blue-dim); }
+  .pipe-node.yellow { border-color: var(--yellow); color: var(--yellow); background: var(--yellow-dim); }
+  .pipe-node.red    { border-color: var(--red);    color: var(--red);    background: var(--red-dim); }
+  .pipe-node.purple { border-color: var(--purple); color: var(--purple); background: var(--purple-dim); }
+  .pipe-arrow { color: var(--text3); font-size: 11px; }
+  .pipe-note { font-size: 11px; color: var(--text3); margin-left: 4px; }
+
+  /* Alert boxes */
+  .alert {
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 12px 0;
+    border-left: 3px solid;
+  }
+  .alert-red    { background: var(--red-dim);    border-color: var(--red);    color: var(--red); }
+  .alert-yellow { background: var(--yellow-dim); border-color: var(--yellow); color: var(--yellow); }
+  .alert-blue   { background: var(--blue-dim);   border-color: var(--blue);   color: var(--blue); }
+  .alert-green  { background: var(--green-dim);  border-color: var(--green);  color: var(--green); }
+  .alert strong { font-weight: 600; }
+  .alert p { color: inherit; margin-bottom: 4px; opacity: 0.9; }
+
+  /* Table */
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+  th { background: var(--bg3); color: var(--text2); font-weight: 600; padding: 8px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+  td { padding: 7px 12px; border-bottom: 1px solid var(--border); color: var(--text2); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  td code { font-family: var(--mono); font-size: 12px; color: var(--purple); }
+
+  /* Step list */
+  .steps { list-style: none; counter-reset: step; }
+  .steps li {
+    counter-increment: step;
+    display: flex;
+    gap: 14px;
+    margin-bottom: 16px;
+    align-items: flex-start;
+  }
+  .steps li::before {
+    content: counter(step);
+    background: var(--blue-dim);
+    border: 1px solid var(--blue);
+    color: var(--blue);
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .steps li .step-content { flex: 1; }
+  .steps li .step-content strong { color: var(--text); font-weight: 600; }
+  .steps li .step-content p { margin-bottom: 6px; }
+
+  /* Copy button */
+  .copy-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text2);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    cursor: pointer;
+    font-family: var(--mono);
+    transition: all 0.15s;
+  }
+  .copy-btn:hover { background: var(--border); color: var(--text); }
+
+  /* Topic flow */
+  .topic-flow {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text2);
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 12px 16px;
+    margin: 8px 0;
+    line-height: 2;
+  }
+  .topic-flow .topic { color: var(--green); }
+  .topic-flow .arrow { color: var(--text3); margin: 0 6px; }
+  .topic-flow .node  { color: var(--blue); }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+<!-- ── Navigation ── -->
+<nav>
+  <div class="logo">
+    <div class="robot">🤖</div>
+    <h1>OP3 LOCALIZATION</h1>
+    <p>Claude Code Guide v10.7b</p>
+  </div>
+
+  <div class="section-label">Overview</div>
+  <a href="#context">Konteks Proyek</a>
+  <a href="#roadmap">Roadmap & Status</a>
+  <a href="#pipeline">Arsitektur Pipeline</a>
+
+  <div class="section-label">Sistem</div>
+  <a href="#files">File & Lokasi</a>
+  <a href="#nodes">Node Inventory</a>
+  <a href="#topics">Topic Map</a>
+  <a href="#params">Parameter Kunci</a>
+
+  <div class="section-label">Masalah</div>
+  <a href="#issues">Known Issues</a>
+  <a href="#debug">Debug Playbook</a>
+  <a href="#history">Riwayat Perubahan</a>
+
+  <div class="section-label">Untuk Claude Code</div>
+  <a href="#howto">Cara Bekerja</a>
+  <a href="#rules">Aturan Penting</a>
+</nav>
+
+<!-- ── Main ── -->
+<main>
+
+<!-- ═══════════════════════════════════════════════ CONTEXT -->
+<section id="context">
+  <h2><span class="icon">🎯</span> Konteks Proyek</h2>
+
+  <p>Penelitian lokalisasi robot humanoid <strong style="color:var(--text)">OP3 (Robotis)</strong> menggunakan ROS2 Humble di simulator Webots. Robot bermain sepak bola di lapangan kidsize RoboCup (9m × 6m). Tujuan: robot dapat mengetahui posisinya sendiri di lapangan secara akurat menggunakan kamera dan sensor IMU.</p>
+
+  <div class="card">
+    <div class="card-title">Spesifikasi Hardware & Environment</div>
+    <table>
+      <tr><th>Parameter</th><th>Nilai</th></tr>
+      <tr><td>Robot</td><td><code>Robotis OP3</code> — humanoid, tinggi 47.5cm</td></tr>
+      <tr><td>Simulator</td><td><code>Webots R2023b</code> + ROS2 Humble</td></tr>
+      <tr><td>Kamera</td><td>Height: 0.475m | Pitch: -20° | Focal: 793.3px | Resolusi: 1280×720</td></tr>
+      <tr><td>Lapangan</td><td>9m × 6m | Origin: tengah lapangan | Goal width: 2.6m</td></tr>
+      <tr><td>Package ROS2</td><td><code>soccer_object_localization</code></td></tr>
+      <tr><td>Workspace</td><td><code>~/basbot/</code></td></tr>
+    </table>
+  </div>
+
+  <div class="card">
+    <div class="card-title">Referensi Paper</div>
+    <table>
+      <tr><th>Paper</th><th>Digunakan untuk</th></tr>
+      <tr><td><strong style="color:var(--text)">Paper 1</strong> — Field line detection</td><td>Deteksi garis lapangan, segment classification</td></tr>
+      <tr><td><strong style="color:var(--text)">Paper 2</strong> — Schulz & Behnke (2012)</td><td>Cox registration, Voronoi LUT, crossing Eq.5, field boundary</td></tr>
+      <tr><td><strong style="color:var(--text)">Paper 3</strong> — AMCL</td><td>Particle filter localization</td></tr>
+    </table>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ ROADMAP -->
+<section id="roadmap">
+  <h2><span class="icon">🗺️</span> Roadmap & Status</h2>
+
+  <table>
+    <tr><th>Fase</th><th>Komponen</th><th>Status</th><th>Catatan</th></tr>
+    <tr>
+      <td><strong style="color:var(--text)">Fase 1</strong></td>
+      <td><code>field_boundary_detector</code><br><code>segment_classifier_gw</code><br><code>goal_yaw_corrector</code></td>
+      <td><span class="badge badge-green">SELESAI</span></td>
+      <td>field_boundary v2.1 (sky-first) — perlu verifikasi lebih lanjut</td>
+    </tr>
+    <tr>
+      <td><strong style="color:var(--text)">Fase 2</strong></td>
+      <td><code>cox_registration</code><br><code>voronoi_lut</code></td>
+      <td><span class="badge badge-green">SELESAI</span></td>
+      <td>Proven di area tengah lapangan</td>
+    </tr>
+    <tr>
+      <td><strong style="color:var(--text)">Fase 3</strong></td>
+      <td><code>crossing_detector v2.4</code><br><code>crossing_amcl_constraint</code></td>
+      <td><span class="badge badge-blue">PRODUCTION</span></td>
+      <td>T/X/L terdeteksi. Belum ada evaluasi RMSE kuantitatif</td>
+    </tr>
+    <tr>
+      <td><strong style="color:var(--text)">Near-goal fix</strong></td>
+      <td><code>scan_gate</code><br><code>goal_localizer</code></td>
+      <td><span class="badge badge-red">BERMASALAH</span></td>
+      <td>v10.7b memburukkan area tengah lapangan. Root cause belum clear. Perlu debug live.</td>
+    </tr>
+  </table>
+
+  <div class="alert alert-red">
+    <strong>🔴 Masalah Aktif:</strong>
+    <p>Di area dekat gawang (|robot_x| &gt; 2.5m), lokalisasi gagal. AMCL particle collapse karena scan laser mendeteksi jaring gawang yang tidak ada di peta. Semua upaya perbaikan via Claude.ai gagal karena tidak bisa debug live.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ PIPELINE -->
+<section id="pipeline">
+  <h2><span class="icon">⚙️</span> Arsitektur Pipeline v10.7b</h2>
+
+  <h3>Launch Timing</h3>
+  <div class="pipeline">
+    <div class="pipe-row">
+      <span class="pipe-time">t=0</span>
+      <span class="pipe-node green">static_tf</span>
+      <span class="pipe-node green">kf_odom</span>
+      <span class="pipe-node green">odom_throttle</span>
+      <span class="pipe-node green">map_server</span>
+      <span class="pipe-node green">ekf_node</span>
+      <span class="pipe-node green">camera + rectify</span>
+    </div>
+    <div class="pipe-row">
+      <span class="pipe-time">t=1</span>
+      <span class="pipe-node blue">lifecycle_manager_map</span>
+    </div>
+    <div class="pipe-row">
+      <span class="pipe-time">t=2</span>
+      <span class="pipe-node">detector_fieldline</span>
+      <span class="pipe-node">simple_pc2scan</span>
+      <span class="pipe-node">scan_stabilizer</span>
+      <span class="pipe-node">field_boundary</span>
+      <span class="pipe-node">segment_classifier</span>
+      <span class="pipe-node yellow">scan_gate ⚠️</span>
+    </div>
+    <div class="pipe-row">
+      <span class="pipe-time">t=3</span>
+      <span class="pipe-node blue">amcl</span>
+      <span class="pipe-note">← scan_topic: field_scan_gated</span>
+    </div>
+    <div class="pipe-row">
+      <span class="pipe-time">t=4</span>
+      <span class="pipe-node blue">lifecycle_manager_amcl</span>
+    </div>
+    <div class="pipe-row">
+      <span class="pipe-time">t=5</span>
+      <span class="pipe-node">particle_converter</span>
+    </div>
+    <div class="pipe-row">
+      <span class="pipe-time">t=6</span>
+      <span class="pipe-node">goal_yaw_corrector</span>
+      <span class="pipe-node">cox_registration</span>
+    </div>
+    <div class="pipe-row">
+      <span class="pipe-time">t=7</span>
+      <span class="pipe-node">crossing_detector</span>
+      <span class="pipe-node">crossing_amcl_constraint</span>
+      <span class="pipe-node yellow">goal_localizer ⚠️</span>
+    </div>
+  </div>
+
+  <h3>Data Flow Utama</h3>
+  <div class="topic-flow">
+    <span class="node">[Kamera]</span><span class="arrow">→</span><span class="topic">/image_rect</span><span class="arrow">→</span><span class="node">field_boundary</span><span class="arrow">→</span><span class="topic">/field_boundary</span><br>
+    <span class="node">[Kamera]</span><span class="arrow">→</span><span class="topic">/image_rect</span><span class="arrow">→</span><span class="node">detector_fieldline</span><span class="arrow">→</span><span class="topic">/field_line_image</span><br>
+    <span class="topic">/field_line_image</span><span class="arrow">+</span><span class="topic">/field_boundary</span><span class="arrow">→</span><span class="node">segment_classifier</span><span class="arrow">→</span><span class="topic">/field_line_segments</span><br>
+    <span class="topic">/field_line_segments</span><span class="arrow">→</span><span class="node">crossing_detector</span><span class="arrow">→</span><span class="topic">/detected_crossings</span><br>
+    <span class="topic">/detected_crossings</span><span class="arrow">→</span><span class="node">crossing_amcl_constraint</span><span class="arrow">→</span><span class="topic">/initialpose</span><br>
+    <span class="topic">/field_line_segments</span><span class="arrow">→</span><span class="node">simple_pc2scan</span><span class="arrow">→</span><span class="topic">/field_scan</span><span class="arrow">→</span><span class="node">scan_stabilizer</span><span class="arrow">→</span><span class="topic">/field_scan_stable</span><br>
+    <span class="topic">/field_scan_stable</span><span class="arrow">→</span><span class="node">scan_gate</span><span class="arrow">→</span><span class="topic">/field_scan_gated</span><span class="arrow">→</span><span class="node">AMCL</span><br>
+    <span class="topic">/odom</span><span class="arrow">→</span><span class="node">odom_throttle</span><span class="arrow">→</span><span class="topic">/odom_throttled</span><span class="arrow">→</span><span class="node">EKF</span><span class="arrow">→</span><span class="topic">/odometry/filtered</span><br>
+    <span class="node">cox_registration</span><span class="arrow">+</span><span class="node">goal_yaw_corrector</span><span class="arrow">+</span><span class="node">goal_localizer</span><span class="arrow">→</span><span class="topic">/initialpose</span><span class="arrow">→</span><span class="node">EKF</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ FILES -->
+<section id="files">
+  <h2><span class="icon">📁</span> File & Lokasi</h2>
+
+  <pre><code><span class="cm"># Package path</span>
+~/basbot/src/soccer_object_localization/soccer_object_localization/
+
+<span class="cm"># Source files yang relevan</span>
+crossing_detector.py          <span class="cm"># Fase 3 v2.4 — PRODUCTION</span>
+field_boundary_detector.py    <span class="cm"># v2.1 sky-first — perlu verifikasi</span>
+segment_classifier_gw.py      <span class="cm"># v2.5 — STABLE</span>
+cox_registration.py           <span class="cm"># STABLE</span>
+crossing_amcl_constraint.py   <span class="cm"># v1.0 — belum dievaluasi kuantitatif</span>
+scan_gate.py                  <span class="cm"># v1.0 — ⚠️ bermasalah, lihat Issues</span>
+goal_localizer.py             <span class="cm"># v1.0 — ⚠️ bermasalah, lihat Issues</span>
+goal_yaw_corrector.py         <span class="cm"># STABLE</span>
+legged_odometry_kf_node.py    <span class="cm"># STABLE</span>
+
+<span class="cm"># Config</span>
+config/ekf_soccer.yaml        <span class="cm"># EKF config v3</span>
+config/voronoi_lut.npz        <span class="cm"># Precomputed Voronoi LUT 550×400px</span>
+config/camera.yaml            <span class="cm"># Kamera OP3</span>
+maps/soccer_field.yaml        <span class="cm"># Peta AMCL (2D occupancy grid)</span>
+
+<span class="cm"># Launch</span>
+launch/localization_v10.launch.py   <span class="cm"># v10.7b — CURRENT</span>
+
+<span class="cm"># Evaluator</span>
+localization_evaluator.py     <span class="cm"># Ground truth dari /ground_truth/odom</span></code></pre>
+
+  <h3>Setup.py Entry Points yang Diperlukan</h3>
+  <pre><code><span class="cm"># Pastikan semua node ini ada di setup.py</span>
+entry_points={
+    'console_scripts': [
+        'crossing_detector = soccer_object_localization.crossing_detector:main',
+        'field_boundary_detector = soccer_object_localization.field_boundary_detector:main',
+        'segment_classifier_gw = soccer_object_localization.segment_classifier_gw:main',
+        'cox_registration = soccer_object_localization.cox_registration:main',
+        'crossing_amcl_constraint = soccer_object_localization.crossing_amcl_constraint:main',
+        'scan_gate = soccer_object_localization.scan_gate:main',
+        'goal_localizer = soccer_object_localization.goal_localizer:main',
+        'localization_evaluator = soccer_object_localization.localization_evaluator:main',
+    ],
+}</code></pre>
+</section>
+
+<!-- ═══════════════════════════════════════════════ NODES -->
+<section id="nodes">
+  <h2><span class="icon">🔷</span> Node Inventory</h2>
+  <table>
+    <tr><th>Node</th><th>Subscribe</th><th>Publish</th><th>Status</th></tr>
+    <tr>
+      <td><code>field_boundary_detector</code></td>
+      <td><code>/image_rect</code></td>
+      <td><code>/field_boundary</code><br><code>/field_boundary_image</code></td>
+      <td><span class="badge badge-yellow">PERLU VERIF</span></td>
+    </tr>
+    <tr>
+      <td><code>segment_classifier_gw</code></td>
+      <td><code>/field_line_image</code><br><code>/field_boundary</code></td>
+      <td><code>/field_line_segments</code></td>
+      <td><span class="badge badge-green">STABLE</span></td>
+    </tr>
+    <tr>
+      <td><code>crossing_detector</code></td>
+      <td><code>/field_line_segments</code><br><code>/odom</code></td>
+      <td><code>/detected_crossings</code><br><code>/crossing_debug_image</code></td>
+      <td><span class="badge badge-green">STABLE</span></td>
+    </tr>
+    <tr>
+      <td><code>crossing_amcl_constraint</code></td>
+      <td><code>/detected_crossings</code><br><code>/odometry/filtered</code></td>
+      <td><code>/initialpose</code></td>
+      <td><span class="badge badge-blue">ACTIVE</span></td>
+    </tr>
+    <tr>
+      <td><code>cox_registration</code></td>
+      <td><code>/field_line_segments</code><br><code>/odometry/filtered</code></td>
+      <td><code>/initialpose</code></td>
+      <td><span class="badge badge-green">STABLE</span></td>
+    </tr>
+    <tr>
+      <td><code>scan_gate</code></td>
+      <td><code>/field_scan_stable</code><br><code>/odometry/filtered</code></td>
+      <td><code>/field_scan_gated</code></td>
+      <td><span class="badge badge-red">⚠️ SUSPECT</span></td>
+    </tr>
+    <tr>
+      <td><code>goal_localizer</code></td>
+      <td><code>/image_rect</code><br><code>/odometry/filtered</code></td>
+      <td><code>/initialpose</code><br><code>/goal_localizer_debug</code></td>
+      <td><span class="badge badge-red">⚠️ SUSPECT</span></td>
+    </tr>
+    <tr>
+      <td><code>amcl</code></td>
+      <td><code>/field_scan_gated</code><br><code>/odom_throttled</code></td>
+      <td><code>/amcl_pose</code><br><code>/particle_cloud</code></td>
+      <td><span class="badge badge-green">STABLE</span></td>
+    </tr>
+    <tr>
+      <td><code>ekf_filter_node</code></td>
+      <td><code>/odom_throttled</code><br><code>/initialpose</code></td>
+      <td><code>/odometry/filtered</code></td>
+      <td><span class="badge badge-green">STABLE</span></td>
+    </tr>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════════════════════ TOPICS -->
+<section id="topics">
+  <h2><span class="icon">📡</span> Topic Map</h2>
+  <table>
+    <tr><th>Topic</th><th>Type</th><th>Keterangan</th></tr>
+    <tr><td><code>/field_boundary</code></td><td><code>Polygon</code></td><td>Boundary lapangan dalam pixel coords</td></tr>
+    <tr><td><code>/field_line_segments</code></td><td><code>Float32MultiArray</code></td><td>Segmen garis: [x1,y1,x2,y2,len,conf,...]</td></tr>
+    <tr><td><code>/detected_crossings</code></td><td><code>PoseArray</code></td><td>pose.position.z = tipe (2=L,3=T,4=X), orientation.w = confidence</td></tr>
+    <tr><td><code>/field_scan_stable</code></td><td><code>LaserScan</code></td><td>Point cloud garis → scan, sudah distabilisasi IMU</td></tr>
+    <tr><td><code>/field_scan_gated</code></td><td><code>LaserScan</code></td><td>field_scan_stable setelah filter jaring gawang</td></tr>
+    <tr><td><code>/odom_throttled</code></td><td><code>Odometry</code></td><td>/odom 100Hz → throttle → 20Hz untuk EKF</td></tr>
+    <tr><td><code>/odometry/filtered</code></td><td><code>Odometry</code></td><td>Output EKF — pose estimasi terbaik</td></tr>
+    <tr><td><code>/initialpose</code></td><td><code>PoseWithCovarianceStamped</code></td><td>Koreksi pose: dibaca oleh EKF dan AMCL</td></tr>
+    <tr><td><code>/ground_truth/odom</code></td><td><code>Odometry</code></td><td>Pose ground truth dari Webots (untuk evaluasi)</td></tr>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════════════════════ PARAMS -->
+<section id="params">
+  <h2><span class="icon">⚡</span> Parameter Kunci</h2>
+
+  <h3>Kamera OP3 (JANGAN UBAH)</h3>
+  <pre><code>focal_length:    793.3   <span class="cm"># px</span>
+cam_pitch_deg:   -20.0   <span class="cm"># deg, negatif = menghadap bawah</span>
+camera_height_m:  0.475  <span class="cm"># m dari lantai</span>
+image_width:     1280
+image_height:     720</code></pre>
+
+  <h3>Lapangan (JANGAN UBAH)</h3>
+  <pre><code>field_half_len:  4.5   <span class="cm"># m (x-axis)</span>
+field_half_wid:  3.0   <span class="cm"># m (y-axis)</span>
+goal_width_m:    2.6   <span class="cm"># m</span>
+penalty_x:       3.1   <span class="cm"># x T-crossing penalty box</span>
+penalty_y:       1.3   <span class="cm"># y T-crossing penalty box</span></code></pre>
+
+  <h3>AMCL (v10.7b — identik v10.6)</h3>
+  <pre><code>scan_topic:          field_scan_gated   <span class="cm"># ← BEDA dari v10.6 (field_scan_stable)</span>
+min_particles:       1000
+max_particles:       8000
+recovery_alpha_slow: 0.001
+recovery_alpha_fast: 0.2
+laser_z_hit:         0.7
+laser_z_rand:        0.3
+laser_sigma_hit:     0.25</code></pre>
+
+  <h3>Crossing Detector (v2.4 — proven)</h3>
+  <pre><code>min_seg_confidence:     0.20
+min_seg_length:         25.0
+cluster_dist_px:        60      <span class="cm"># FIX2: 35→60</span>
+goal_filter_angle_deg:  70.0    <span class="cm"># FIX1: tiang gawang</span>
+goal_filter_top_ratio:   0.30
+world_merge_dist_m:      0.25   <span class="cm"># FIX2: dedup world space</span>
+roi_top_ratio:           0.25
+roi_bottom_ratio:        0.97
+max_crossings_per_frame: 6</code></pre>
+
+  <h3>scan_gate (⚠️ SUSPECT — perlu debug)</h3>
+  <pre><code>near_goal_x_m:    2.5   <span class="cm"># aktif jika |robot_x| > ini</span>
+full_filter_x_m:  3.5   <span class="cm"># filter agresif di penalty box</span>
+close_range_m:    1.5   <span class="cm"># ⚠️ mungkin terlalu besar, hapus point cloud garis</span>
+full_close_range: 2.0   <span class="cm"># ⚠️ mungkin terlalu besar</span></code></pre>
+
+  <h3>Voronoi LUT</h3>
+  <pre><code>Map size:  550×400 px
+Field:     11×8 m
+Res:       0.02 m/px
+Origin:    (-5.5, -4.0)</code></pre>
+</section>
+
+<!-- ═══════════════════════════════════════════════ ISSUES -->
+<section id="issues">
+  <h2><span class="icon">🔴</span> Known Issues</h2>
+
+  <div class="alert alert-red">
+    <strong>ISSUE #1 — KRITIS: AMCL Collapse di Area Dekat Gawang</strong>
+    <p>Ketika robot berada di |x| &gt; 2.5m (mendekati gawang), scan laser mendeteksi jaring gawang sebagai obstacle. Peta AMCL tidak mengandung jaring → semua partikel dapat likelihood rendah → particle collapse → AMCL diam.</p>
+    <p><strong>Upaya yang gagal:</strong> scan_gate (v10.7) + parameter AMCL agresif → memperburuk area tengah lapangan. Rollback ke v10.7b tapi masalah near-goal belum solved.</p>
+    <p><strong>Perlu:</strong> Debug live — cek apakah scan_gate memfilter terlalu banyak, apakah goal_localizer publish pose salah.</p>
+  </div>
+
+  <div class="alert alert-yellow">
+    <strong>ISSUE #2: scan_gate + goal_localizer membuat v10.7b lebih buruk dari v10.6</strong>
+    <p>Diagnosis: kemungkinan (a) scan_gate memfilter range yang terlalu besar, menghapus point cloud garis lapangan, atau (b) goal_localizer mendeteksi tiang palsu dan publish pose salah terus-menerus.</p>
+    <p><strong>Cara debug:</strong></p>
+    <pre style="margin:8px 0"><code>ros2 topic hz /field_scan_gated
+ros2 topic echo /field_scan_gated --field ranges | python3 -c "
+import sys, ast
+for line in sys.stdin:
+    r = ast.literal_eval(line.strip())
+    valid = [x for x in r if x &lt; 4.5]
+    print(f'valid ranges: {len(valid)}/{len(r)}')"
+ros2 topic echo /goal_localizer_debug
+ros2 node kill /scan_gate && ros2 node kill /goal_localizer  <span class="cm"># test tanpa keduanya</span></code></pre>
+  </div>
+
+  <div class="alert alert-yellow">
+    <strong>ISSUE #3: field_boundary_detector v2.1 belum diverifikasi penuh</strong>
+    <p>Sky-first approach (v2.1) diperbaiki dari v2.0 yang gagal karena jaring gawang. Namun belum ada test komprehensif di semua posisi robot. Verifikasi visual dari /field_boundary_image diperlukan.</p>
+  </div>
+
+  <div class="alert alert-blue">
+    <strong>ISSUE #4: crossing_amcl_constraint belum dievaluasi kuantitatif</strong>
+    <p>Node aktif dan publish /initialpose, tapi belum ada perbandingan RMSE dengan/tanpa node ini. Jalankan localization_evaluator.py untuk mendapatkan angka.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════ DEBUG -->
+<section id="debug">
+  <h2><span class="icon">🔧</span> Debug Playbook</h2>
+
+  <h3>Quick Sanity Check</h3>
+  <pre><code><span class="cm"># 1. Cek semua node aktif</span>
+ros2 node list | grep -E "amcl|ekf|crossing|boundary|segment|scan"
+
+<span class="cm"># 2. Cek topic yang kritis aktif</span>
+ros2 topic hz /field_line_segments   <span class="cm"># harusnya ~10Hz</span>
+ros2 topic hz /detected_crossings    <span class="cm"># harusnya ~10Hz</span>
+ros2 topic hz /field_scan_gated      <span class="cm"># harusnya ~10Hz</span>
+ros2 topic hz /odometry/filtered     <span class="cm"># harusnya ~10Hz</span>
+
+<span class="cm"># 3. Cek scan_gate tidak membuang terlalu banyak data</span>
+ros2 topic echo /field_scan_gated --once 2>/dev/null | grep -c "inf\|4.5"</code></pre>
+
+  <h3>Debug Near-Goal Problem (PRIORITAS)</h3>
+  <pre><code><span class="cm"># Step 1: Isolasi apakah scan_gate yang bermasalah</span>
+<span class="cm"># Disable scan_gate, ubah AMCL kembali ke field_scan_stable</span>
+ros2 param set /amcl scan_topic field_scan_stable
+ros2 node kill /scan_gate
+<span class="cm"># Uji: apakah area tengah lapangan kembali normal?</span>
+
+<span class="cm"># Step 2: Cek apakah goal_localizer publish pose yang aneh</span>
+ros2 topic echo /goal_localizer_debug
+ros2 topic echo /initialpose | grep -A5 "position"
+<span class="cm"># Jika position.x melompat jauh → goal_localizer salah deteksi</span>
+
+<span class="cm"># Step 3: Isolasi node per node</span>
+ros2 node kill /goal_localizer     <span class="cm"># test tanpa goal_localizer</span>
+ros2 node kill /scan_gate          <span class="cm"># test tanpa scan_gate</span>
+ros2 node kill /crossing_amcl_constraint  <span class="cm"># test tanpa crossing constraint</span>
+
+<span class="cm"># Step 4: Monitor particle count AMCL</span>
+ros2 topic echo /particle_cloud --field poses | wc -l
+<span class="cm"># Jika turun drastis di area dekat gawang → particle collapse</span></code></pre>
+
+  <h3>Evaluasi RMSE</h3>
+  <pre><code><span class="cm"># Run evaluator (simpan CSV)</span>
+ros2 run soccer_object_localization localization_evaluator \
+  --ros-args -p output_csv:=/tmp/eval_$(date +%H%M).csv
+
+<span class="cm"># Setelah robot bergerak, analisis hasil</span>
+python3 -c "
+import csv, math
+with open('/tmp/eval_HHMM.csv') as f:
+    rows = list(csv.DictReader(f))
+errors = [float(r['error_m']) for r in rows if r.get('error_m')]
+print(f'N={len(errors)}')
+print(f'RMSE = {math.sqrt(sum(e**2 for e in errors)/len(errors)):.3f}m')
+print(f'Mean = {sum(errors)/len(errors):.3f}m')
+print(f'Max  = {max(errors):.3f}m')
+"</code></pre>
+
+  <h3>Build & Deploy</h3>
+  <pre><code>cd ~/basbot
+colcon build --packages-select soccer_object_localization --symlink-install
+source install/setup.bash
+
+<span class="cm"># Launch</span>
+ros2 launch soccer_object_localization localization_v10.launch.py
+
+<span class="cm"># Monitor semua koreksi pose</span>
+ros2 topic echo /initialpose --field pose.pose.position</code></pre>
+</section>
+
+<!-- ═══════════════════════════════════════════════ HISTORY -->
+<section id="history">
+  <h2><span class="icon">📜</span> Riwayat Perubahan</h2>
+  <table>
+    <tr><th>Versi</th><th>Perubahan</th><th>Hasil</th></tr>
+    <tr>
+      <td><code>v10.5</code></td>
+      <td>Baseline proven. Tambah odom_throttle (100Hz→20Hz).</td>
+      <td><span class="badge badge-green">STABLE</span></td>
+    </tr>
+    <tr>
+      <td><code>v10.6</code></td>
+      <td>+ crossing_detector v2.4 (FIX1 goal filter, FIX2 dedup, FIX3 direction groups)<br>+ crossing_amcl_constraint (Paper 2 Eq.5)</td>
+      <td><span class="badge badge-green">LEBIH BAIK</span> — T/X terdeteksi, crossing constraint aktif</td>
+    </tr>
+    <tr>
+      <td><code>v10.7</code></td>
+      <td>+ scan_gate (filter jaring gawang)<br>+ goal_localizer (lokalisasi dari lebar gawang)<br>AMCL: recovery_alpha agresif, laser_z_* berubah</td>
+      <td><span class="badge badge-red">LEBIH BURUK</span> — area tengah lapangan rusak. Penyebab: recovery_alpha_fast=0.4 terlalu agresif</td>
+    </tr>
+    <tr>
+      <td><code>v10.7b</code></td>
+      <td>Rollback AMCL ke v10.6 params. scan_gate + goal_localizer tetap ada. Satu-satunya beda dari v10.6: scan_topic=field_scan_gated</td>
+      <td><span class="badge badge-red">MASIH BERMASALAH</span> — masih lebih buruk dari v10.6. Root cause belum clear. Perlu debug live.</td>
+    </tr>
+    <tr>
+      <td><code>crossing_detector</code></td>
+      <td>v1.x (skeleton): gagal total. v2.0 (intersection): berhasil. v2.1→v2.3: model kamera fix, endpoint filter. v2.4: FIX1+2+3</td>
+      <td><span class="badge badge-green">PRODUCTION</span></td>
+    </tr>
+    <tr>
+      <td><code>field_boundary</code></td>
+      <td>v1.x: gagal (garis putih, penalty spot). v2.0: top-down green scan → gagal (jaring). v2.1: sky-first → lebih baik, belum verif penuh</td>
+      <td><span class="badge badge-yellow">PERLU VERIF</span></td>
+    </tr>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════════════════════ HOWTO -->
+<section id="howto">
+  <h2><span class="icon">💻</span> Cara Bekerja dengan Claude Code</h2>
+
+  <div class="alert alert-green">
+    <strong>Kenapa Claude Code lebih baik untuk proyek ini:</strong>
+    <p>Akses langsung ke filesystem → bisa baca semua file sekaligus tanpa upload. Bisa run perintah ROS2 untuk debug live. Iterasi langsung tanpa copy-paste. Bisa monitor topic dan log secara real-time.</p>
+  </div>
+
+  <h3>Workflow yang Disarankan</h3>
+  <ul class="steps">
+    <li>
+      <div class="step-content">
+        <strong>Baca guide ini dulu</strong>
+        <p>File ini adalah entry point. Baca semua section sebelum mulai mengubah kode.</p>
+      </div>
+    </li>
+    <li>
+      <div class="step-content">
+        <strong>Baca source file yang relevan</strong>
+        <p>Jangan ubah kode tanpa membaca isinya terlebih dahulu. Setiap file memiliki docstring yang menjelaskan versi, perubahan, dan alasan perubahan.</p>
+        <pre><code>cat ~/basbot/src/soccer_object_localization/soccer_object_localization/scan_gate.py</code></pre>
+      </div>
+    </li>
+    <li>
+      <div class="step-content">
+        <strong>Debug sebelum ubah</strong>
+        <p>Jalankan perintah debug di bagian Debug Playbook untuk memahami kondisi sistem sebelum membuat perubahan apapun.</p>
+      </div>
+    </li>
+    <li>
+      <div class="step-content">
+        <strong>Ubah satu hal, test, laporkan</strong>
+        <p>Jangan ubah banyak parameter sekaligus. Satu perubahan per iterasi. Catat hasilnya (lebih baik/buruk/sama).</p>
+      </div>
+    </li>
+    <li>
+      <div class="step-content">
+        <strong>Update docstring setiap perubahan signifikan</strong>
+        <p>Tambahkan changelog di docstring file Python. Ini penting agar riwayat perubahan tidak hilang.</p>
+      </div>
+    </li>
+  </ul>
+
+  <h3>Perintah yang Sering Digunakan</h3>
+  <pre><code><span class="cm"># Build</span>
+cd ~/basbot && colcon build --packages-select soccer_object_localization --symlink-install
+
+<span class="cm"># Launch</span>
+source ~/basbot/install/setup.bash
+ros2 launch soccer_object_localization localization_v10.launch.py
+
+<span class="cm"># Monitor</span>
+ros2 topic hz /detected_crossings
+ros2 topic echo /crossing_constraint_debug
+ros2 topic echo /goal_localizer_debug
+rqt_graph   <span class="cm"># visualisasi topic graph</span>
+
+<span class="cm"># Debug visual (buka di browser/image viewer)</span>
+ros2 run rqt_image_view rqt_image_view /crossing_debug_image
+ros2 run rqt_image_view rqt_image_view /field_boundary_image
+ros2 run rqt_image_view rqt_image_view /goal_localizer_debug</code></pre>
+</section>
+
+<!-- ═══════════════════════════════════════════════ RULES -->
+<section id="rules">
+  <h2><span class="icon">📌</span> Aturan Penting</h2>
+
+  <div class="alert alert-red">
+    <strong>❌ JANGAN lakukan ini:</strong>
+    <p>• Ubah parameter kamera (focal, pitch, height) — sudah dikalibrasi dengan teliti</p>
+    <p>• Ubah dimensi lapangan (field_half_len, field_half_wid, penalty_x/y)</p>
+    <p>• Ubah banyak parameter AMCL sekaligus — proven merusak konvergensi</p>
+    <p>• Ubah Voronoi LUT — proses precompute memakan waktu lama</p>
+    <p>• Hapus node yang sudah proven (cox_registration, crossing_detector v2.4)</p>
+  </div>
+
+  <div class="alert alert-green">
+    <strong>✅ LAKUKAN ini:</strong>
+    <p>• Debug live sebelum mengubah kode</p>
+    <p>• Test satu perubahan per iterasi</p>
+    <p>• Untuk masalah near-goal: mulai dari isolasi node (kill scan_gate, kill goal_localizer) dan observasi efeknya</p>
+    <p>• Catat hasil evaluasi RMSE sebelum dan sesudah perubahan</p>
+    <p>• Baca docstring di setiap file sebelum mengubah</p>
+  </div>
+
+  <h3>Prioritas Pekerjaan (berurutan)</h3>
+  <table>
+    <tr><th>#</th><th>Task</th><th>Keterangan</th></tr>
+    <tr>
+      <td>1</td>
+      <td><strong style="color:var(--red)">Debug near-goal collapse</strong></td>
+      <td>Isolasi: apakah scan_gate atau goal_localizer yang bermasalah. Kill masing-masing dan test.</td>
+    </tr>
+    <tr>
+      <td>2</td>
+      <td>Verifikasi field_boundary v2.1</td>
+      <td>Test di berbagai posisi robot, terutama dekat gawang dan area penalty box.</td>
+    </tr>
+    <tr>
+      <td>3</td>
+      <td>Evaluasi crossing_amcl_constraint</td>
+      <td>Ukur RMSE dengan/tanpa node ini untuk membuktikan kontribusinya.</td>
+    </tr>
+    <tr>
+      <td>4</td>
+      <td>Tuning scan_gate parameter</td>
+      <td>Setelah tahu parameter yang safe, tuning close_range_m agar tidak menghapus point cloud garis.</td>
+    </tr>
+  </table>
+</section>
+
+</main>
+</div>
+
+<script>
+// Active nav link berdasarkan scroll
+const sections = document.querySelectorAll('section[id]');
+const links = document.querySelectorAll('nav a');
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      links.forEach(l => l.classList.remove('active'));
+      const link = document.querySelector(`nav a[href="#${e.target.id}"]`);
+      if (link) link.classList.add('active');
+    }
+  });
+}, { threshold: 0.3 });
+
+sections.forEach(s => observer.observe(s));
+
+// Copy button untuk code blocks
+document.querySelectorAll('pre').forEach(pre => {
+  const btn = document.createElement('button');
+  btn.className = 'copy-btn';
+  btn.textContent = 'copy';
+  btn.onclick = () => {
+    navigator.clipboard.writeText(pre.querySelector('code').innerText);
+    btn.textContent = 'copied!';
+    setTimeout(() => btn.textContent = 'copy', 1500);
+  };
+  pre.appendChild(btn);
+});
+</script>
+</body>
+</html>

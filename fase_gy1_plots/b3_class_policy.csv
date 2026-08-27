@@ -1,0 +1,9 @@
+mode,confuse,mis_assoc,assoc_recall,fp_accept,agnostic_pf,assoc_n
+X-agnostic  (LTX),0.00,0.1405,0.8553,0.0000,0.172,4896
+X-agnostic  (LTX),0.10,0.1416,0.8528,0.0000,0.439,4888
+X-agnostic  (LTX),0.20,0.1715,0.8238,0.0000,0.600,4892
+X-agnostic  (LTX),0.40,0.1732,0.8197,0.0000,0.831,4878
+X-distinctive (LT),0.00,0.1225,0.8732,0.0000,0.131,4896
+X-distinctive (LT),0.10,0.1209,0.8362,0.0000,0.262,4680
+X-distinctive (LT),0.20,0.1492,0.7756,0.0000,0.344,4485
+X-distinctive (LT),0.40,0.1737,0.6846,0.0000,0.508,4076

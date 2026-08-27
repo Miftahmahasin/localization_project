@@ -1,0 +1,69 @@
+[H] set /degrade_relay fp_classes = [0,1,2]
+Set parameter successful
+[H] set /degrade_relay fp_per_frame = 3
+Set parameter successful
+[H] eval point 'c2fp_' (1 run, walk=60s) ...
+== precheck: is the localization stack up? ==
+   OK. eval window per run = 77.0s ; runs = 1 ; prefix = c2fp_
+
+############################################################
+# RUN 1/1  ->  c2fp_1.csv
+############################################################
+[T2] teleport -> (-2.5, 0.0, 0.0 deg)
+     settle 3.0s ...
+[T2] seed (reliable, x6) ...
+[INFO] [1787538092.318115212] [seed_side]: seed 1/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=1
+[INFO] [1787538092.630165717] [seed_side]: seed 2/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=1
+[INFO] [1787538092.941702815] [seed_side]: seed 3/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=1
+[INFO] [1787538093.253687250] [seed_side]: seed 4/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=1
+[INFO] [1787538093.569328927] [seed_side]: seed 5/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=1
+[INFO] [1787538093.881575453] [seed_side]: seed 6/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=1
+[INFO] [1787538094.193573458] [seed_side]: seed 7/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=1
+[INFO] [1787538094.505279821] [seed_side]: seed 8/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787538094.817382851] [seed_side]: seed 9/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787538095.132148189] [seed_side]: seed 10/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+     settle 2.0s (EKF reset + ref commit) ...
+[T3] eval -> c2fp_1.csv (dur 77.0s)
+[INFO] [1787538097.934947929] [landmark_eval]: logging -> c2fp_1.csv (dur=77s)
+[T4] walk (x=0.012, angle=0.0, 60s) ...
+[INFO] [1787538099.187475963] [walk_op3]: -> walking_module
+[INFO] [1787538101.208786629] [walk_op3]: -> set_params x=0.012 y=0.000 angle=0.0deg (period=650ms, hip_pitch=5.0deg)
+[INFO] [1787538101.710245670] [walk_op3]: -> start
+[INFO] [1787538101.912663283] [walk_op3]: WALKING for 60 s (Ctrl-C to stop early)…
+[INFO] [1787538161.927533540] [walk_op3]: -> stop
+[INFO] [1787538162.431972125] [walk_op3]: STOP sent.
+     walk done; waiting for eval to finish ...
+
+=== live run summary ===
+  c2fp_1.csv: n=771  pos RMSE=0.239 m  median=0.086  p95=0.547  yaw RMSE=2.09 deg
+       time-to-converge(<0.30m for 3s)=5.7 s
+       RAW fix vs GT: n=759  RMSE=0.205 m  median=0.083  p95=0.541
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  fixes: full=420 single=2  (5.5/s)  longest fix-less gap=1.67 s
+
+############################################################
+# AGGREGATE
+############################################################
+
+##########################################################################
+# seeded_B2  (1 runs)
+##########################################################################
+  c2fp_1.csv: n=771  pos RMSE=0.239 m  median=0.086  p95=0.547  yaw RMSE=2.09 deg
+       time-to-converge(<0.30m for 3s)=5.7 s
+       RAW fix vs GT: n=759  RMSE=0.205 m  median=0.083  p95=0.541
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+
+==========================================================================
+SCENARIO: seeded_B2   (n_runs=1)
+==========================================================================
+  metric            mean±std              min       max
+  ------------------------------------------------------
+  pos RMSE [m]      0.239±0.000         0.239     0.239
+  yaw RMSE [deg]    2.094±0.000         2.094     2.094
+  median [m]        0.086±0.000         0.086     0.086
+  p95 [m]           0.547±0.000         0.547     0.547
+  converge [s]      5.7±0.0             5.654     5.654   [1/1 runs converged]
+  mirror [%]        0.0±0.0             0.000     0.000
+  side flips [#]    0.0±0.0                 0         0
+
+done. CSVs: c2fp_1.csv

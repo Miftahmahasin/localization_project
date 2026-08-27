@@ -1,0 +1,320 @@
+##### B point R=2.0 #####
+[H] set /degrade_relay filter_classes = [-1]
+Set parameter successful
+[H] set /degrade_relay cutoff_classes = [0,1,2,3,4]
+Set parameter successful
+[H] set /degrade_relay cutoff_range_m = 2.0
+Set parameter successful
+[H] eval point 'b_cut20_' (2 run, walk=60s) ...
+== precheck: is the localization stack up? ==
+   OK. eval window per run = 77.0s ; runs = 2 ; prefix = b_cut20_
+
+############################################################
+# RUN 1/2  ->  b_cut20_1.csv
+############################################################
+[T2] teleport -> (-2.5, 0.0, 0.0 deg)
+     settle 3.0s ...
+[T2] seed (reliable, x6) ...
+[INFO] [1787532905.478644810] [seed_side]: seed 1/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=1
+[INFO] [1787532905.791489592] [seed_side]: seed 2/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=1
+[INFO] [1787532906.103040082] [seed_side]: seed 3/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787532906.415117600] [seed_side]: seed 4/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787532906.909931811] [seed_side]: seed 5/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787532907.221925701] [seed_side]: seed 6/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787532907.533657587] [seed_side]: seed 7/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787532907.845451647] [seed_side]: seed 8/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787532908.157651831] [seed_side]: seed 9/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787532908.469619379] [seed_side]: seed 10/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+     settle 2.0s (EKF reset + ref commit) ...
+[T3] eval -> b_cut20_1.csv (dur 77.0s)
+[INFO] [1787532911.216038821] [landmark_eval]: logging -> b_cut20_1.csv (dur=77s)
+[T4] walk (x=0.012, angle=0.0, 60s) ...
+[INFO] [1787532912.195309119] [walk_op3]: -> walking_module
+[INFO] [1787532914.213013981] [walk_op3]: -> set_params x=0.012 y=0.000 angle=0.0deg (period=650ms, hip_pitch=5.0deg)
+[INFO] [1787532914.865145152] [walk_op3]: -> start
+[INFO] [1787532915.069104589] [walk_op3]: WALKING for 60 s (Ctrl-C to stop early)…
+[INFO] [1787532975.141732862] [walk_op3]: -> stop
+[INFO] [1787532975.646898992] [walk_op3]: STOP sent.
+     walk done; waiting for eval to finish ...
+
+=== live run summary ===
+  b_cut20_1.csv: n=769  pos RMSE=1.873 m  median=0.453  p95=3.187  yaw RMSE=4.06 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       RAW fix vs GT: n=359  RMSE=2.739 m  median=3.170  p95=3.211
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  fixes: full=0 single=204  (2.7/s)  longest fix-less gap=14.69 s
+     inter-run gap 4.0s ...
+
+############################################################
+# RUN 2/2  ->  b_cut20_2.csv
+############################################################
+[T2] teleport -> (-2.5, 0.0, 0.0 deg)
+     settle 3.0s ...
+[T2] seed (reliable, x6) ...
+[INFO] [1787532998.728099893] [seed_side]: seed 1/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787532999.040313588] [seed_side]: seed 2/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787532999.352437063] [seed_side]: seed 3/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787532999.664796430] [seed_side]: seed 4/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787532999.978095252] [seed_side]: seed 5/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533000.290318196] [seed_side]: seed 6/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533000.603973009] [seed_side]: seed 7/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533000.916268576] [seed_side]: seed 8/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533001.227867848] [seed_side]: seed 9/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533001.539781993] [seed_side]: seed 10/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+     settle 2.0s (EKF reset + ref commit) ...
+[T3] eval -> b_cut20_2.csv (dur 77.0s)
+[INFO] [1787533004.344396106] [landmark_eval]: logging -> b_cut20_2.csv (dur=77s)
+[T4] walk (x=0.012, angle=0.0, 60s) ...
+[INFO] [1787533005.518864384] [walk_op3]: -> walking_module
+[INFO] [1787533007.542626593] [walk_op3]: -> set_params x=0.012 y=0.000 angle=0.0deg (period=650ms, hip_pitch=5.0deg)
+[INFO] [1787533008.044357822] [walk_op3]: -> start
+[INFO] [1787533008.247270280] [walk_op3]: WALKING for 60 s (Ctrl-C to stop early)…
+[INFO] [1787533068.287714423] [walk_op3]: -> stop
+[INFO] [1787533068.792215348] [walk_op3]: STOP sent.
+     walk done; waiting for eval to finish ...
+
+=== live run summary ===
+  b_cut20_2.csv: n=770  pos RMSE=0.318 m  median=0.148  p95=0.714  yaw RMSE=2.84 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       RAW fix vs GT: n=622  RMSE=0.319 m  median=0.239  p95=0.527
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  fixes: full=0 single=323  (4.2/s)  longest fix-less gap=22.62 s
+
+############################################################
+# AGGREGATE
+############################################################
+
+##########################################################################
+# seeded_B2  (2 runs)
+##########################################################################
+  b_cut20_1.csv: n=769  pos RMSE=1.873 m  median=0.453  p95=3.187  yaw RMSE=4.06 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       RAW fix vs GT: n=359  RMSE=2.739 m  median=3.170  p95=3.211
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  b_cut20_2.csv: n=770  pos RMSE=0.318 m  median=0.148  p95=0.714  yaw RMSE=2.84 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       RAW fix vs GT: n=622  RMSE=0.319 m  median=0.239  p95=0.527
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+
+==========================================================================
+SCENARIO: seeded_B2   (n_runs=2)
+==========================================================================
+  metric            mean±std              min       max
+  ------------------------------------------------------
+  pos RMSE [m]      1.095±0.777         0.318     1.873
+  yaw RMSE [deg]    3.452±0.612         2.840     4.064
+  median [m]        0.301±0.152         0.148     0.453
+  p95 [m]           1.950±1.237         0.714     3.187
+  converge [s]      0.0±0.0             0.000     0.000   [2/2 runs converged]
+  mirror [%]        0.0±0.0             0.000     0.000
+  side flips [#]    0.0±0.0                 0         0
+
+done. CSVs: b_cut20_1.csv b_cut20_2.csv
+##### B point R=1.5 #####
+[H] set /degrade_relay cutoff_range_m = 1.5
+Set parameter successful
+[H] eval point 'b_cut15_' (2 run, walk=60s) ...
+== precheck: is the localization stack up? ==
+   OK. eval window per run = 77.0s ; runs = 2 ; prefix = b_cut15_
+
+############################################################
+# RUN 1/2  ->  b_cut15_1.csv
+############################################################
+[T2] teleport -> (-2.5, 0.0, 0.0 deg)
+     settle 3.0s ...
+[T2] seed (reliable, x6) ...
+[INFO] [1787533093.098410065] [seed_side]: seed 1/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533093.410309663] [seed_side]: seed 2/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533093.721983846] [seed_side]: seed 3/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533094.033296995] [seed_side]: seed 4/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533094.345063272] [seed_side]: seed 5/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533094.656766412] [seed_side]: seed 6/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533094.968873827] [seed_side]: seed 7/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533095.280746402] [seed_side]: seed 8/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533095.592286086] [seed_side]: seed 9/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533095.904457953] [seed_side]: seed 10/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+     settle 2.0s (EKF reset + ref commit) ...
+[T3] eval -> b_cut15_1.csv (dur 77.0s)
+[INFO] [1787533098.992594415] [landmark_eval]: logging -> b_cut15_1.csv (dur=77s)
+[T4] walk (x=0.012, angle=0.0, 60s) ...
+[INFO] [1787533099.512297824] [walk_op3]: -> walking_module
+[INFO] [1787533101.535211555] [walk_op3]: -> set_params x=0.012 y=0.000 angle=0.0deg (period=650ms, hip_pitch=5.0deg)
+[INFO] [1787533102.036632366] [walk_op3]: -> start
+[INFO] [1787533102.239471412] [walk_op3]: WALKING for 60 s (Ctrl-C to stop early)…
+[INFO] [1787533162.291737004] [walk_op3]: -> stop
+[INFO] [1787533162.796452938] [walk_op3]: STOP sent.
+     walk done; waiting for eval to finish ...
+
+=== live run summary ===
+  b_cut15_1.csv: n=771  pos RMSE=0.498 m  median=0.447  p95=0.745  yaw RMSE=3.19 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  fixes: full=0 single=0  (0.0/s)  longest fix-less gap=0.00 s
+     inter-run gap 4.0s ...
+
+############################################################
+# RUN 2/2  ->  b_cut15_2.csv
+############################################################
+[T2] teleport -> (-2.5, 0.0, 0.0 deg)
+     settle 3.0s ...
+[T2] seed (reliable, x6) ...
+[INFO] [1787533186.588901608] [seed_side]: seed 1/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=1
+[INFO] [1787533186.900936450] [seed_side]: seed 2/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=1
+[INFO] [1787533187.212985116] [seed_side]: seed 3/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=1
+[INFO] [1787533187.524574428] [seed_side]: seed 4/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=1
+[INFO] [1787533187.836502725] [seed_side]: seed 5/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533188.147964958] [seed_side]: seed 6/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533188.462503452] [seed_side]: seed 7/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533188.774240719] [seed_side]: seed 8/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533189.085856204] [seed_side]: seed 9/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533189.398049284] [seed_side]: seed 10/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+     settle 2.0s (EKF reset + ref commit) ...
+[T3] eval -> b_cut15_2.csv (dur 77.0s)
+[INFO] [1787533192.516991016] [landmark_eval]: logging -> b_cut15_2.csv (dur=77s)
+[T4] walk (x=0.012, angle=0.0, 60s) ...
+[INFO] [1787533192.945740023] [walk_op3]: -> walking_module
+[INFO] [1787533194.969825739] [walk_op3]: -> set_params x=0.012 y=0.000 angle=0.0deg (period=650ms, hip_pitch=5.0deg)
+[INFO] [1787533195.471372812] [walk_op3]: -> start
+[INFO] [1787533195.674029507] [walk_op3]: WALKING for 60 s (Ctrl-C to stop early)…
+[INFO] [1787533255.718860658] [walk_op3]: -> stop
+[INFO] [1787533256.223227533] [walk_op3]: STOP sent.
+     walk done; waiting for eval to finish ...
+
+=== live run summary ===
+  b_cut15_2.csv: n=771  pos RMSE=0.522 m  median=0.470  p95=0.776  yaw RMSE=1.36 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  fixes: full=0 single=0  (0.0/s)  longest fix-less gap=0.00 s
+
+############################################################
+# AGGREGATE
+############################################################
+
+##########################################################################
+# seeded_B2  (2 runs)
+##########################################################################
+  b_cut15_1.csv: n=771  pos RMSE=0.498 m  median=0.447  p95=0.745  yaw RMSE=3.19 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  b_cut15_2.csv: n=771  pos RMSE=0.522 m  median=0.470  p95=0.776  yaw RMSE=1.36 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+
+==========================================================================
+SCENARIO: seeded_B2   (n_runs=2)
+==========================================================================
+  metric            mean±std              min       max
+  ------------------------------------------------------
+  pos RMSE [m]      0.510±0.012         0.498     0.522
+  yaw RMSE [deg]    2.275±0.916         1.359     3.192
+  median [m]        0.459±0.012         0.447     0.470
+  p95 [m]           0.760±0.016         0.745     0.776
+  converge [s]      0.0±0.0             0.000     0.000   [2/2 runs converged]
+  mirror [%]        0.0±0.0             0.000     0.000
+  side flips [#]    0.0±0.0                 0         0
+
+done. CSVs: b_cut15_1.csv b_cut15_2.csv
+##### B point R=1.0 #####
+[H] set /degrade_relay cutoff_range_m = 1.0
+Set parameter successful
+[H] eval point 'b_cut10_' (2 run, walk=60s) ...
+== precheck: is the localization stack up? ==
+   OK. eval window per run = 77.0s ; runs = 2 ; prefix = b_cut10_
+
+############################################################
+# RUN 1/2  ->  b_cut10_1.csv
+############################################################
+[T2] teleport -> (-2.5, 0.0, 0.0 deg)
+     settle 3.0s ...
+[T2] seed (reliable, x6) ...
+[INFO] [1787533282.130525169] [seed_side]: seed 1/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533282.442139697] [seed_side]: seed 2/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533282.754027711] [seed_side]: seed 3/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533283.065500559] [seed_side]: seed 4/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533283.377040560] [seed_side]: seed 5/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533283.689311000] [seed_side]: seed 6/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533284.001057381] [seed_side]: seed 7/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533284.312805145] [seed_side]: seed 8/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533284.624978225] [seed_side]: seed 9/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533284.936527823] [seed_side]: seed 10/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+     settle 2.0s (EKF reset + ref commit) ...
+[T3] eval -> b_cut10_1.csv (dur 77.0s)
+[INFO] [1787533288.064673404] [landmark_eval]: logging -> b_cut10_1.csv (dur=77s)
+[T4] walk (x=0.012, angle=0.0, 60s) ...
+[INFO] [1787533288.517959752] [walk_op3]: -> walking_module
+[INFO] [1787533290.538287694] [walk_op3]: -> set_params x=0.012 y=0.000 angle=0.0deg (period=650ms, hip_pitch=5.0deg)
+[INFO] [1787533291.039580501] [walk_op3]: -> start
+[INFO] [1787533291.242061918] [walk_op3]: WALKING for 60 s (Ctrl-C to stop early)…
+[INFO] [1787533351.322089472] [walk_op3]: -> stop
+[INFO] [1787533351.827675888] [walk_op3]: STOP sent.
+     walk done; waiting for eval to finish ...
+
+=== live run summary ===
+  b_cut10_1.csv: n=765  pos RMSE=0.525 m  median=0.468  p95=0.787  yaw RMSE=3.95 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  fixes: full=0 single=0  (0.0/s)  longest fix-less gap=0.00 s
+     inter-run gap 4.0s ...
+
+############################################################
+# RUN 2/2  ->  b_cut10_2.csv
+############################################################
+[T2] teleport -> (-2.5, 0.0, 0.0 deg)
+     settle 3.0s ...
+[T2] seed (reliable, x6) ...
+[INFO] [1787533375.022327773] [seed_side]: seed 1/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533375.334644960] [seed_side]: seed 2/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533375.646179910] [seed_side]: seed 3/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533375.958630003] [seed_side]: seed 4/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533376.270614622] [seed_side]: seed 5/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533376.582333640] [seed_side]: seed 6/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533376.894549338] [seed_side]: seed 7/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533377.206251050] [seed_side]: seed 8/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533377.518526376] [seed_side]: seed 9/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[INFO] [1787533377.830176605] [seed_side]: seed 10/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+     settle 2.0s (EKF reset + ref commit) ...
+[T3] eval -> b_cut10_2.csv (dur 77.0s)
+[INFO] [1787533380.937882643] [landmark_eval]: logging -> b_cut10_2.csv (dur=77s)
+[T4] walk (x=0.012, angle=0.0, 60s) ...
+[INFO] [1787533381.540680502] [walk_op3]: -> walking_module
+[INFO] [1787533383.560378603] [walk_op3]: -> set_params x=0.012 y=0.000 angle=0.0deg (period=650ms, hip_pitch=5.0deg)
+[INFO] [1787533384.061983035] [walk_op3]: -> start
+[INFO] [1787533384.266429595] [walk_op3]: WALKING for 60 s (Ctrl-C to stop early)…
+[INFO] [1787533444.324779416] [walk_op3]: -> stop
+[INFO] [1787533444.831993386] [walk_op3]: STOP sent.
+     walk done; waiting for eval to finish ...
+
+=== live run summary ===
+  b_cut10_2.csv: n=770  pos RMSE=0.552 m  median=0.496  p95=0.829  yaw RMSE=4.57 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  fixes: full=0 single=0  (0.0/s)  longest fix-less gap=0.00 s
+
+############################################################
+# AGGREGATE
+############################################################
+
+##########################################################################
+# seeded_B2  (2 runs)
+##########################################################################
+  b_cut10_1.csv: n=765  pos RMSE=0.525 m  median=0.468  p95=0.787  yaw RMSE=3.95 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  b_cut10_2.csv: n=770  pos RMSE=0.552 m  median=0.496  p95=0.829  yaw RMSE=4.57 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+
+==========================================================================
+SCENARIO: seeded_B2   (n_runs=2)
+==========================================================================
+  metric            mean±std              min       max
+  ------------------------------------------------------
+  pos RMSE [m]      0.538±0.013         0.525     0.552
+  yaw RMSE [deg]    4.259±0.313         3.946     4.571
+  median [m]        0.482±0.014         0.468     0.496
+  p95 [m]           0.808±0.021         0.787     0.829
+  converge [s]      0.0±0.0             0.000     0.000   [2/2 runs converged]
+  mirror [%]        0.0±0.0             0.000     0.000
+  side flips [#]    0.0±0.0                 0         0
+
+done. CSVs: b_cut10_1.csv b_cut10_2.csv

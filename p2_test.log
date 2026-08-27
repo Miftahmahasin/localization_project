@@ -1,0 +1,8 @@
+[T] teleport seed (-2.5,0,0)
+[INFO] [1787550085.423276806] [seed_side]: seed 10/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[E] eval -> p2_1.csv (40s)
+[FALL] /fall=true @ ~t=4s
+[K] teleport-rotate to 180deg (while frozen)
+[RECOVER] /fall=false @ ~t=6.5s -> forces heading reloc
+    logging recovery ...
+[done]

@@ -1,0 +1,311 @@
+
+################  8b RE-ENTRY  ################
+== precheck: is the localization stack up? ==
+   OK. RESEED=true ; eval/run=55s ; runs=5 ; prefix=kr_run
+   START=(-2.18,0.0)  RE-ENTRY=(-1.0,2.5)
+
+############################################################
+# RUN 1/5  ->  kr_run1.csv
+############################################################
+[A] START (-2.18,0.0) teleport + seed (unmeasured prior)
+[INFO] [1787535490.423378828] [seed_side]: seed 1/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=1
+[INFO] [1787535490.734963447] [seed_side]: seed 2/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=1
+[INFO] [1787535491.047177457] [seed_side]: seed 3/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535491.359329047] [seed_side]: seed 4/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535491.671226200] [seed_side]: seed 5/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535491.983333529] [seed_side]: seed 6/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535492.298116485] [seed_side]: seed 7/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535492.717882566] [seed_side]: seed 8/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535493.030521593] [seed_side]: seed 9/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535493.342709466] [seed_side]: seed 10/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+    converge-hold 3.0s ...
+[B] KIDNAP -> RE-ENTRY (-1.0,2.5); WALK first (proper stance)
+    re-stand+walk 7.0s (clean fixes) before re-seed ...
+[INFO] [1787535500.952544846] [walk_op3]: -> walking_module
+[INFO] [1787535502.977768073] [walk_op3]: -> set_params x=0.012 y=0.000 angle=0.0deg (period=650ms, hip_pitch=5.0deg)
+[INFO] [1787535503.479337084] [walk_op3]: -> start
+[INFO] [1787535503.682075841] [walk_op3]: WALKING for 65 s (Ctrl-C to stop early)…
+    RESEED at re-entry (announced, robot walking = clean fixes) ...
+[INFO] [1787535508.728397942] [seed_side]: seed 1/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=1
+[INFO] [1787535509.040634207] [seed_side]: seed 2/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=1
+[INFO] [1787535509.353285984] [seed_side]: seed 3/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=1
+[INFO] [1787535509.903555480] [seed_side]: seed 4/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535510.217004231] [seed_side]: seed 5/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535510.529005858] [seed_side]: seed 6/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535510.844235293] [seed_side]: seed 7/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535511.156029822] [seed_side]: seed 8/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535511.468364790] [seed_side]: seed 9/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535511.780709837] [seed_side]: seed 10/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[C] eval -> kr_run1.csv (dur 55s) while walking
+[INFO] [1787535514.602986178] [landmark_eval]: logging -> kr_run1.csv (dur=55s)
+[INFO] [1787535568.687931026] [walk_op3]: -> stop
+[INFO] [1787535569.196513445] [walk_op3]: STOP sent.
+
+=== live run summary ===
+  kr_run1.csv: n=550  pos RMSE=0.126 m  median=0.092  p95=0.188  yaw RMSE=1.45 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       RAW fix vs GT: n=550  RMSE=0.146 m  median=0.093  p95=0.221
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  fixes: full=500 single=0  (9.1/s)  longest fix-less gap=0.34 s
+    eval done; letting walk finish cleanly (sends its own stop) ...
+    inter-run gap 4.0s ...
+
+############################################################
+# RUN 2/5  ->  kr_run2.csv
+############################################################
+[A] START (-2.18,0.0) teleport + seed (unmeasured prior)
+[INFO] [1787535583.452169929] [seed_side]: seed 1/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535583.764208022] [seed_side]: seed 2/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535584.079354049] [seed_side]: seed 3/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535584.390853966] [seed_side]: seed 4/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535584.702658104] [seed_side]: seed 5/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535585.013884767] [seed_side]: seed 6/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535585.325746948] [seed_side]: seed 7/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535585.637263613] [seed_side]: seed 8/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535585.948595145] [seed_side]: seed 9/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535586.259855362] [seed_side]: seed 10/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+    converge-hold 3.0s ...
+[B] KIDNAP -> RE-ENTRY (-1.0,2.5); WALK first (proper stance)
+    re-stand+walk 7.0s (clean fixes) before re-seed ...
+[INFO] [1787535594.922385959] [walk_op3]: -> walking_module
+[INFO] [1787535596.946977377] [walk_op3]: -> set_params x=0.012 y=0.000 angle=0.0deg (period=650ms, hip_pitch=5.0deg)
+[INFO] [1787535597.448739121] [walk_op3]: -> start
+[INFO] [1787535597.652284841] [walk_op3]: WALKING for 65 s (Ctrl-C to stop early)…
+    RESEED at re-entry (announced, robot walking = clean fixes) ...
+[INFO] [1787535602.422125977] [seed_side]: seed 1/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=1
+[INFO] [1787535602.733945746] [seed_side]: seed 2/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=1
+[INFO] [1787535603.045191938] [seed_side]: seed 3/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=1
+[INFO] [1787535603.356719253] [seed_side]: seed 4/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=1
+[INFO] [1787535603.668652628] [seed_side]: seed 5/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=1
+[INFO] [1787535603.979836450] [seed_side]: seed 6/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=1
+[INFO] [1787535604.291850179] [seed_side]: seed 7/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=1
+[INFO] [1787535604.603797134] [seed_side]: seed 8/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=1
+[INFO] [1787535604.915773495] [seed_side]: seed 9/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535605.227521618] [seed_side]: seed 10/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[C] eval -> kr_run2.csv (dur 55s) while walking
+[INFO] [1787535607.981172060] [landmark_eval]: logging -> kr_run2.csv (dur=55s)
+[INFO] [1787535662.704992036] [walk_op3]: -> stop
+[INFO] [1787535663.213507498] [walk_op3]: STOP sent.
+
+=== live run summary ===
+  kr_run2.csv: n=550  pos RMSE=0.116 m  median=0.112  p95=0.154  yaw RMSE=1.28 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       RAW fix vs GT: n=533  RMSE=0.117 m  median=0.112  p95=0.158
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  fixes: full=485 single=0  (8.8/s)  longest fix-less gap=0.31 s
+    eval done; letting walk finish cleanly (sends its own stop) ...
+    inter-run gap 4.0s ...
+
+############################################################
+# RUN 3/5  ->  kr_run3.csv
+############################################################
+[A] START (-2.18,0.0) teleport + seed (unmeasured prior)
+[INFO] [1787535678.998482308] [seed_side]: seed 1/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=1
+[INFO] [1787535679.310451822] [seed_side]: seed 2/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=1
+[INFO] [1787535679.622247765] [seed_side]: seed 3/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=1
+[INFO] [1787535679.934043187] [seed_side]: seed 4/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=1
+[INFO] [1787535680.245637482] [seed_side]: seed 5/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=1
+[INFO] [1787535680.757290961] [seed_side]: seed 6/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535681.069312146] [seed_side]: seed 7/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535681.381473834] [seed_side]: seed 8/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535681.695350259] [seed_side]: seed 9/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535682.010959693] [seed_side]: seed 10/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+    converge-hold 3.0s ...
+[B] KIDNAP -> RE-ENTRY (-1.0,2.5); WALK first (proper stance)
+    re-stand+walk 7.0s (clean fixes) before re-seed ...
+[INFO] [1787535689.496803532] [walk_op3]: -> walking_module
+[INFO] [1787535691.531883115] [walk_op3]: -> set_params x=0.012 y=0.000 angle=0.0deg (period=650ms, hip_pitch=5.0deg)
+[INFO] [1787535692.033749398] [walk_op3]: -> start
+[INFO] [1787535692.236165863] [walk_op3]: WALKING for 65 s (Ctrl-C to stop early)…
+    RESEED at re-entry (announced, robot walking = clean fixes) ...
+[INFO] [1787535697.738873761] [seed_side]: seed 1/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=1
+[INFO] [1787535698.050931081] [seed_side]: seed 2/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=1
+[INFO] [1787535698.673601382] [seed_side]: seed 3/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535698.987964503] [seed_side]: seed 4/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535699.299929291] [seed_side]: seed 5/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535699.611696725] [seed_side]: seed 6/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535699.923296679] [seed_side]: seed 7/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535700.237412423] [seed_side]: seed 8/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535700.549679514] [seed_side]: seed 9/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535700.861332121] [seed_side]: seed 10/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[C] eval -> kr_run3.csv (dur 55s) while walking
+[INFO] [1787535704.010711549] [landmark_eval]: logging -> kr_run3.csv (dur=55s)
+[INFO] [1787535757.252186411] [walk_op3]: -> stop
+[INFO] [1787535757.759611887] [walk_op3]: STOP sent.
+
+=== live run summary ===
+  kr_run3.csv: n=550  pos RMSE=0.152 m  median=0.120  p95=0.281  yaw RMSE=1.40 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       RAW fix vs GT: n=549  RMSE=0.184 m  median=0.120  p95=0.213
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  fixes: full=492 single=0  (9.0/s)  longest fix-less gap=0.33 s
+    eval done; letting walk finish cleanly (sends its own stop) ...
+    inter-run gap 4.0s ...
+
+############################################################
+# RUN 4/5  ->  kr_run4.csv
+############################################################
+[A] START (-2.18,0.0) teleport + seed (unmeasured prior)
+[INFO] [1787535772.033791260] [seed_side]: seed 1/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=1
+[INFO] [1787535772.347275781] [seed_side]: seed 2/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=1
+[INFO] [1787535772.659017753] [seed_side]: seed 3/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=1
+[INFO] [1787535772.972425682] [seed_side]: seed 4/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535773.287841836] [seed_side]: seed 5/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535773.600116365] [seed_side]: seed 6/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535773.911954038] [seed_side]: seed 7/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535774.226084640] [seed_side]: seed 8/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535774.537657698] [seed_side]: seed 9/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535774.849360095] [seed_side]: seed 10/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+    converge-hold 3.0s ...
+[B] KIDNAP -> RE-ENTRY (-1.0,2.5); WALK first (proper stance)
+    re-stand+walk 7.0s (clean fixes) before re-seed ...
+[INFO] [1787535782.117951319] [walk_op3]: -> walking_module
+[INFO] [1787535784.147248619] [walk_op3]: -> set_params x=0.012 y=0.000 angle=0.0deg (period=650ms, hip_pitch=5.0deg)
+[INFO] [1787535784.648563618] [walk_op3]: -> start
+[INFO] [1787535784.851402244] [walk_op3]: WALKING for 65 s (Ctrl-C to stop early)…
+    RESEED at re-entry (announced, robot walking = clean fixes) ...
+[INFO] [1787535789.238625039] [seed_side]: seed 1/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535789.550830160] [seed_side]: seed 2/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535789.862546808] [seed_side]: seed 3/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535790.174456264] [seed_side]: seed 4/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535790.486506483] [seed_side]: seed 5/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535790.799025798] [seed_side]: seed 6/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535791.111766174] [seed_side]: seed 7/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535791.423349664] [seed_side]: seed 8/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535791.735349544] [seed_side]: seed 9/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535792.047333715] [seed_side]: seed 10/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[C] eval -> kr_run4.csv (dur 55s) while walking
+[INFO] [1787535794.965230779] [landmark_eval]: logging -> kr_run4.csv (dur=55s)
+[INFO] [1787535849.939620504] [walk_op3]: -> stop
+
+=== live run summary ===
+  kr_run4.csv: n=528  pos RMSE=0.120 m  median=0.094  p95=0.182  yaw RMSE=1.36 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       RAW fix vs GT: n=550  RMSE=0.159 m  median=0.099  p95=0.235
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  fixes: full=497 single=0  (9.1/s)  longest fix-less gap=0.31 s
+    eval done; letting walk finish cleanly (sends its own stop) ...
+[INFO] [1787535850.446426940] [walk_op3]: STOP sent.
+    inter-run gap 4.0s ...
+
+############################################################
+# RUN 5/5  ->  kr_run5.csv
+############################################################
+[A] START (-2.18,0.0) teleport + seed (unmeasured prior)
+[INFO] [1787535865.808923316] [seed_side]: seed 1/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=1
+[INFO] [1787535866.120958725] [seed_side]: seed 2/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=1
+[INFO] [1787535866.432476108] [seed_side]: seed 3/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535866.744457169] [seed_side]: seed 4/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535867.057639541] [seed_side]: seed 5/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535867.371158889] [seed_side]: seed 6/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535867.685932666] [seed_side]: seed 7/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535867.998012263] [seed_side]: seed 8/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535868.309655656] [seed_side]: seed 9/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+[INFO] [1787535868.622937198] [seed_side]: seed 10/10 -> /initialpose (-2.18, 0.00, 0.0 deg)  subs=2
+    converge-hold 3.0s ...
+[B] KIDNAP -> RE-ENTRY (-1.0,2.5); WALK first (proper stance)
+    re-stand+walk 7.0s (clean fixes) before re-seed ...
+[INFO] [1787535876.277651844] [walk_op3]: -> walking_module
+[INFO] [1787535878.304371717] [walk_op3]: -> set_params x=0.012 y=0.000 angle=0.0deg (period=650ms, hip_pitch=5.0deg)
+[INFO] [1787535878.806552648] [walk_op3]: -> start
+[INFO] [1787535879.011575243] [walk_op3]: WALKING for 65 s (Ctrl-C to stop early)…
+    RESEED at re-entry (announced, robot walking = clean fixes) ...
+[INFO] [1787535883.776131513] [seed_side]: seed 1/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=1
+[INFO] [1787535884.088186332] [seed_side]: seed 2/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=1
+[INFO] [1787535884.403420502] [seed_side]: seed 3/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535884.715410724] [seed_side]: seed 4/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535885.027207349] [seed_side]: seed 5/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535885.338871071] [seed_side]: seed 6/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535885.652423585] [seed_side]: seed 7/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535885.964772885] [seed_side]: seed 8/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535886.276665223] [seed_side]: seed 9/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[INFO] [1787535886.588374743] [seed_side]: seed 10/10 -> /initialpose (-1.00, 2.50, 0.0 deg)  subs=2
+[C] eval -> kr_run5.csv (dur 55s) while walking
+[INFO] [1787535889.455587824] [landmark_eval]: logging -> kr_run5.csv (dur=55s)
+[INFO] [1787535944.098292090] [walk_op3]: -> stop
+[INFO] [1787535944.602363215] [walk_op3]: STOP sent.
+
+=== live run summary ===
+  kr_run5.csv: n=550  pos RMSE=0.124 m  median=0.108  p95=0.201  yaw RMSE=1.38 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       RAW fix vs GT: n=550  RMSE=0.163 m  median=0.111  p95=0.233
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  fixes: full=476 single=12  (8.9/s)  longest fix-less gap=0.29 s
+    eval done; letting walk finish cleanly (sends its own stop) ...
+
+############################################################
+# AGGREGATE
+############################################################
+
+##########################################################################
+# reentry_8b  (5 runs)
+##########################################################################
+  kr_run1.csv: n=550  pos RMSE=0.126 m  median=0.092  p95=0.188  yaw RMSE=1.45 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       RAW fix vs GT: n=550  RMSE=0.146 m  median=0.093  p95=0.221
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  kr_run2.csv: n=550  pos RMSE=0.116 m  median=0.112  p95=0.154  yaw RMSE=1.28 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       RAW fix vs GT: n=533  RMSE=0.117 m  median=0.112  p95=0.158
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  kr_run3.csv: n=550  pos RMSE=0.152 m  median=0.120  p95=0.281  yaw RMSE=1.40 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       RAW fix vs GT: n=549  RMSE=0.184 m  median=0.120  p95=0.213
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  kr_run4.csv: n=528  pos RMSE=0.120 m  median=0.094  p95=0.182  yaw RMSE=1.36 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       RAW fix vs GT: n=550  RMSE=0.159 m  median=0.099  p95=0.235
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  kr_run5.csv: n=550  pos RMSE=0.124 m  median=0.108  p95=0.201  yaw RMSE=1.38 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       RAW fix vs GT: n=550  RMSE=0.163 m  median=0.111  p95=0.233
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+
+==========================================================================
+SCENARIO: reentry_8b   (n_runs=5)
+==========================================================================
+  metric            mean±std              min       max
+  ------------------------------------------------------
+  pos RMSE [m]      0.128±0.013         0.116     0.152
+  yaw RMSE [deg]    1.372±0.055         1.279     1.448
+  median [m]        0.105±0.011         0.092     0.120
+  p95 [m]           0.201±0.043         0.154     0.281
+  converge [s]      0.0±0.0             0.000     0.000   [5/5 runs converged]
+  mirror [%]        0.0±0.0             0.000     0.000
+  side flips [#]    0.0±0.0                 0         0
+
+done. CSVs: kr_run1.csv kr_run2.csv kr_run3.csv kr_run4.csv kr_run5.csv
+  kr_run1.csv: n=550  pos RMSE=0.126 m  median=0.092  p95=0.188  yaw RMSE=1.45 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       RAW fix vs GT: n=550  RMSE=0.146 m  median=0.093  p95=0.221
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  kr_run2.csv: n=550  pos RMSE=0.116 m  median=0.112  p95=0.154  yaw RMSE=1.28 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       RAW fix vs GT: n=533  RMSE=0.117 m  median=0.112  p95=0.158
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  kr_run3.csv: n=550  pos RMSE=0.152 m  median=0.120  p95=0.281  yaw RMSE=1.40 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       RAW fix vs GT: n=549  RMSE=0.184 m  median=0.120  p95=0.213
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  kr_run4.csv: n=528  pos RMSE=0.120 m  median=0.094  p95=0.182  yaw RMSE=1.36 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       RAW fix vs GT: n=550  RMSE=0.159 m  median=0.099  p95=0.235
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  kr_run5.csv: n=550  pos RMSE=0.124 m  median=0.108  p95=0.201  yaw RMSE=1.38 deg
+       time-to-converge(<0.30m for 3s)=0.0 s
+       RAW fix vs GT: n=550  RMSE=0.163 m  median=0.111  p95=0.233
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+============================================================
+REGRESSION GATE — 8b re-entry   (n=5 runs)
+------------------------------------------------------------
+  [PASS] pos median-of-med   0.108 <= 0.3 m
+  [PASS] mirror-outliers    0.000 <= 1 runs
+  [PASS] flip-outliers      0.000 <= 1 runs
+  [PASS] converged          5.000 >= 4 /5
+------------------------------------------------------------
+  VERDICT: PASS
+============================================================
+
+############################################################
+# REGRESSION: PASS — baseline held.
+############################################################

@@ -1,0 +1,1 @@
+t_s,gt_x,gt_y,gt_yaw_deg,odom_x,odom_y,odom_yaw_deg,ekf_x,ekf_y,ekf_yaw_deg,amcl_x,amcl_y,amcl_yaw_deg,err_ekf_pos_m,err_ekf_yaw_deg,err_amcl_pos_m,err_amcl_yaw_deg

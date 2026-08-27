@@ -1,0 +1,31 @@
+digraph G {
+"odom" -> "base_link"[label=" Broadcaster: default_authority\nAverage rate: 53.139\nBuffer length: 5.043\nMost recent transform: 1771001257.85791\nOldest transform: 1771001252.814534\n"];
+"base_link" -> "head_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"head_tilt_link" -> "cam_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"base" -> "body_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"head_pan_link" -> "head_tilt_link"[label=" Broadcaster: default_authority\nAverage rate: 13.29\nBuffer length: 3.536\nMost recent transform: 1771001256.538855\nOldest transform: 1771001253.002385\n"];
+"head_tilt_link" -> "cam_gazebo_link"[label=" Broadcaster: default_authority\nAverage rate: 10000.0\nBuffer length: 0.0\nMost recent transform: 0.0\nOldest transform: 0.0\n"];
+"body_link" -> "head_pan_link"[label=" Broadcaster: default_authority\nAverage rate: 13.29\nBuffer length: 3.536\nMost recent transform: 1771001256.538855\nOldest transform: 1771001253.002385\n"];
+"l_knee_link" -> "l_ank_pitch_link"[label=" Broadcaster: default_authority\nAverage rate: 13.29\nBuffer length: 3.536\nMost recent transform: 1771001256.538855\nOldest transform: 1771001253.002385\n"];
+"l_hip_pitch_link" -> "l_knee_link"[label=" Broadcaster: default_authority\nAverage rate: 13.29\nBuffer length: 3.536\nMost recent transform: 1771001256.538855\nOldest transform: 1771001253.002385\n"];
+"l_ank_pitch_link" -> "l_ank_roll_link"[label=" Broadcaster: default_authority\nAverage rate: 13.29\nBuffer length: 3.536\nMost recent transform: 1771001256.538855\nOldest transform: 1771001253.002385\n"];
+"l_sho_roll_link" -> "l_el_link"[label=" Broadcaster: default_authority\nAverage rate: 13.29\nBuffer length: 3.536\nMost recent transform: 1771001256.538855\nOldest transform: 1771001253.002385\n"];
+"l_sho_pitch_link" -> "l_sho_roll_link"[label=" Broadcaster: default_authority\nAverage rate: 13.29\nBuffer length: 3.536\nMost recent transform: 1771001256.538855\nOldest transform: 1771001253.002385\n"];
+"l_hip_roll_link" -> "l_hip_pitch_link"[label=" Broadcaster: default_authority\nAverage rate: 13.29\nBuffer length: 3.536\nMost recent transform: 1771001256.538855\nOldest transform: 1771001253.002385\n"];
+"l_hip_yaw_link" -> "l_hip_roll_link"[label=" Broadcaster: default_authority\nAverage rate: 13.29\nBuffer length: 3.536\nMost recent transform: 1771001256.538855\nOldest transform: 1771001253.002385\n"];
+"body_link" -> "l_hip_yaw_link"[label=" Broadcaster: default_authority\nAverage rate: 13.29\nBuffer length: 3.536\nMost recent transform: 1771001256.538855\nOldest transform: 1771001253.002385\n"];
+"body_link" -> "l_sho_pitch_link"[label=" Broadcaster: default_authority\nAverage rate: 13.29\nBuffer length: 3.536\nMost recent transform: 1771001256.538855\nOldest transform: 1771001253.002385\n"];
+"r_knee_link" -> "r_ank_pitch_link"[label=" Broadcaster: default_authority\nAverage rate: 13.29\nBuffer length: 3.536\nMost recent transform: 1771001256.538855\nOldest transform: 1771001253.002385\n"];
+"r_hip_pitch_link" -> "r_knee_link"[label=" Broadcaster: default_authority\nAverage rate: 13.29\nBuffer length: 3.536\nMost recent transform: 1771001256.538855\nOldest transform: 1771001253.002385\n"];
+"r_ank_pitch_link" -> "r_ank_roll_link"[label=" Broadcaster: default_authority\nAverage rate: 13.29\nBuffer length: 3.536\nMost recent transform: 1771001256.538855\nOldest transform: 1771001253.002385\n"];
+"r_sho_roll_link" -> "r_el_link"[label=" Broadcaster: default_authority\nAverage rate: 13.29\nBuffer length: 3.536\nMost recent transform: 1771001256.538855\nOldest transform: 1771001253.002385\n"];
+"r_sho_pitch_link" -> "r_sho_roll_link"[label=" Broadcaster: default_authority\nAverage rate: 13.29\nBuffer length: 3.536\nMost recent transform: 1771001256.538855\nOldest transform: 1771001253.002385\n"];
+"r_hip_roll_link" -> "r_hip_pitch_link"[label=" Broadcaster: default_authority\nAverage rate: 13.29\nBuffer length: 3.536\nMost recent transform: 1771001256.538855\nOldest transform: 1771001253.002385\n"];
+"r_hip_yaw_link" -> "r_hip_roll_link"[label=" Broadcaster: default_authority\nAverage rate: 13.29\nBuffer length: 3.536\nMost recent transform: 1771001256.538855\nOldest transform: 1771001253.002385\n"];
+"body_link" -> "r_hip_yaw_link"[label=" Broadcaster: default_authority\nAverage rate: 13.29\nBuffer length: 3.536\nMost recent transform: 1771001256.538855\nOldest transform: 1771001253.002385\n"];
+"body_link" -> "r_sho_pitch_link"[label=" Broadcaster: default_authority\nAverage rate: 13.29\nBuffer length: 3.536\nMost recent transform: 1771001256.538855\nOldest transform: 1771001253.002385\n"];
+edge [style=invis];
+ subgraph cluster_legend { style=bold; color=black; label ="view_frames Result";
+"Recorded at time: 1771001257.8750064"[ shape=plaintext ] ;
+}->"base";
+}

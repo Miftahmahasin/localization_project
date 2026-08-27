@@ -1,0 +1,22 @@
+
+[SCENE 1/5] KICKOFF — di paruh sendiri, hadap gawang lawan; maju ke bola
+   place -> (-0.9, 0.0, 0 deg), re-seed, walk ...
+   robot at GT (-0.85, 0.00, -0 deg) -> seeding there
+
+[SCENE 2/5] SERANG — dribble menembus tengah ke paruh lawan
+   place -> (0.4, 0.4, -10 deg), re-seed, walk ...
+   robot at GT (0.45, 0.39, -10 deg) -> seeding there
+
+[SCENE 3/5] LEMPAR-KE-DALAM — sayap kanan atas, arahkan ke dalam lapangan
+   place -> (1.6, 2.2, -110 deg), re-seed, walk ...
+   robot at GT (1.58, 2.15, -110 deg) -> seeding there
+
+[SCENE 4/5] BERTAHAN — kembali ke area sendiri, hadap gawang sendiri
+   place -> (-2.6, 0.6, 175 deg), re-seed, walk ...
+   robot at GT (-2.65, 0.60, 175 deg) -> seeding there
+
+[SCENE 5/5] TENDANGAN SUDUT lawan — pojok kanan bawah
+   place -> (3.0, -1.6, 120 deg), re-seed, walk ...
+   robot at GT (2.98, -1.56, 120 deg) -> seeding there
+
+match_demo done.

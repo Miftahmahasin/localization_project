@@ -1,0 +1,7 @@
+[T] teleport to seed (-2.5,0,0)
+[S] seed side
+[INFO] [1787549522.970812815] [seed_side]: seed 10/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[E] start eval -> hk1.csv (35s)
+[K] HEADING-KIDNAP: teleport-rotate to (-2.5,0,180deg) @ ~t=4s of eval
+    logging recovery ...
+[done]

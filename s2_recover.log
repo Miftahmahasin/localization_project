@@ -1,0 +1,40 @@
+[seed] -2.5,0,0
+[converged] yaw_err=175.1 deg
+[kidnap] teleport-rotate to 180 deg; SPIN-WAIT for GT confirm ...
+    gt_yaw=-180.0
+[kidnapped] gt_yaw=-180.0  yaw_err=177.0 deg (should be ~180, stuck)
+[/fall pulse] true -> false (heading-uncertain reset)
+[walk] straight, 25s, logging recovery ...
+    t+ 1.0s  gt_yaw= 180.0  yaw_err= 178.9
+    t+ 2.1s  gt_yaw=-180.0  yaw_err= 167.3
+    t+ 3.1s  gt_yaw=-180.0  yaw_err= 170.7
+    t+ 4.2s  gt_yaw= 180.0  yaw_err= 176.3
+    t+ 5.2s  gt_yaw= 180.0  yaw_err= 176.3
+    t+ 6.2s  gt_yaw= 180.0  yaw_err= 177.1
+    t+ 7.2s  gt_yaw=-180.0  yaw_err= 167.2
+    t+ 8.2s  gt_yaw=-180.0  yaw_err= 172.5
+    t+ 9.2s  gt_yaw=-180.0  yaw_err= 177.0
+    t+10.3s  gt_yaw=-180.0  yaw_err= 178.0
+    t+11.3s  gt_yaw= 180.0  yaw_err= 176.4
+    t+12.3s  gt_yaw= 180.0  yaw_err= 172.6
+    t+13.3s  gt_yaw=-180.0  yaw_err= 175.8
+    t+14.3s  gt_yaw=-180.0  yaw_err= 177.7
+    t+15.4s  gt_yaw=-180.0  yaw_err= 178.3
+    t+16.4s  gt_yaw=-180.0  yaw_err= 179.7
+    t+17.4s  gt_yaw=-180.0  yaw_err= 179.4
+    t+18.4s  gt_yaw=-180.0  yaw_err= 179.4
+    t+19.5s  gt_yaw=-180.0  yaw_err= 179.8
+    t+20.5s  gt_yaw=-180.0  yaw_err= 179.3
+    t+21.5s  gt_yaw=-180.0  yaw_err= 179.2
+    t+22.5s  gt_yaw=-180.0  yaw_err= 179.2
+    t+23.5s  gt_yaw=-180.0  yaw_err= 179.2
+    t+24.6s  gt_yaw=-180.0  yaw_err= 179.3
+    t+25.6s  gt_yaw=-180.0  yaw_err= 179.3
+    t+26.6s  gt_yaw=-180.0  yaw_err= 179.3
+    t+27.6s  gt_yaw=-180.0  yaw_err= 179.4
+    t+28.7s  gt_yaw=-180.0  yaw_err= 179.4
+    t+29.7s  gt_yaw=-180.0  yaw_err= 179.4
+    t+30.7s  gt_yaw=-180.0  yaw_err= 179.4
+
+==== RESULT ====
+NOT recovered within 30s

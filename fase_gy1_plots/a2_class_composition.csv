@@ -1,0 +1,4 @@
+regime,ge2,solved,valid_fix,fail_single,fail_unsolved,fail_illcond,fail_ambig,fail_inacc,err_pos_med,err_pos_p95,err_yaw_med,cond_med,cond_p95,fix_needs_junction,fix_nonjunction_only
+all classes,0.973,0.950,0.936,0.028,0.022,0.004,0.939,0.010,0.000,0.000,0.00,283,2121,0.999,0.532
+goalpost+circle only,0.499,0.499,0.308,0.501,0.000,0.159,0.492,0.032,0.000,1.331,0.00,2104,130509,0.000,1.000
+junctions only,0.928,0.928,0.859,0.072,0.000,0.004,0.907,0.065,0.000,2.994,0.00,277,3985,1.000,0.000

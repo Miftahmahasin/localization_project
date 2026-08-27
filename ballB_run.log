@@ -1,0 +1,20 @@
+[T] teleport seed (-2.5,0,0)
+[INFO] [1787557396.844438448] [seed_side]: seed 10/10 -> /initialpose (-2.50, 0.00, 0.0 deg)  subs=2
+[E] eval -> ballB.csv (44s)
+[BALL+WALK] ball_head_sim (down-gaze, --enable-module, 34s) + walk (30s)
+[INFO] [1787557436.719027138] [walk_op3]: STOP sent.
+     walk done; waiting ...
+[head monitor]
+head cmds=338  horizon frac=0.0%  ball-down frac=100.0%  tilt median=-44 deg
+[accuracy]
+  ballB.csv: n=440  pos RMSE=0.214 m  median=0.114  p95=0.203  yaw RMSE=1.23 deg
+       RAW fix vs GT: n=436  RMSE=0.318 m  median=0.082  p95=0.288
+       side (|GT|>0.5m): TRUE 100%  MIRROR 0%  flips=0 (0 near-centre samples excluded)
+  pos RMSE [m]      0.214±0.000         0.214     0.214
+  yaw RMSE [deg]    1.232±0.000         1.232     1.232
+  median [m]        0.114±0.000         0.114     0.114
+  p95 [m]           0.203±0.000         0.203     0.203
+  mirror [%]        0.0±0.0             0.000     0.000
+  side flips [#]    0.0±0.0                 0         0
+  ballB.csv: n=440  pos RMSE=0.214 m  median=0.114  p95=0.203  yaw RMSE=1.23 deg
+[done]
