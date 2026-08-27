@@ -1,0 +1,13 @@
+# Ultralytics data config for the auto-labeled OP3 Webots landmark dataset.
+# Ultralytics resolves labels by swapping 'images' -> 'labels' in each path,
+# so train/{images,labels} and val/{images,labels} work unchanged.
+#
+# LOCAL use (this workstation): keep the absolute `path` below.
+# CLOUD use: package_for_cloud.py writes a portable landmark.yaml with a
+# relative path next to the uploaded JPG dataset — use that one there.
+path: /media/miftah/backup/landmark_dataset
+train: train/images
+val: val/images
+
+nc: 5
+names: ['L', 'T', 'X', 'goalpost', 'center_circle']

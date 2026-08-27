@@ -1,0 +1,56 @@
+# Parameters for the YOLO landmark detector in Webots simulation (ONNX backend).
+#
+# Webots camera publishes raw Image (sensor_msgs/Image, BGRA8 encoding) on:
+#   /robotis_op3/camera/image_raw
+# This is NOT compressed, so use_compressed must be false.
+#
+# Model: field8n.onnx — detects 8 soccer-field landmark classes:
+#   0: Corner       1: Gawang (goal)       2: Kotak Penalti (penalty area)
+#   3: bola (ball)  4: left corner         5: right corner
+#   6: titik penalti (penalty spot)        7: titik tengah (centre spot)
+#
+# Detections are published on <namespace>/detections as
+# vision_msgs/Detection2DArray.  Each Detection2D carries:
+#   bbox.center.x / .y  : bounding-box centre in pixels
+#   bbox.size_x / .y    : bounding-box width / height in pixels
+#   results[0].hypothesis.class_id  : class name (e.g. "Gawang")
+#   results[0].hypothesis.score     : confidence
+/**:
+  ros__parameters:
+    # ONNX model. Relative to the package share dir.
+    model_path: "model/field8n.onnx"
+
+    # Ultralytics task: always "detect" for field8n.
+    model_task: "detect"
+
+    # Webots publishes raw sensor_msgs/Image (BGRA8), not CompressedImage.
+    use_compressed: false
+
+    # Detection thresholds.
+    confidence_threshold: 0.40
+    iou_threshold: 0.45
+
+    # MUST match the imgsz the model was trained/exported with.
+    imgsz: 512
+
+    # CPU inference.
+    device: "cpu"
+    half: false
+    max_detections: 20
+
+    # Empty list = detect ALL classes (all 8 landmark types).
+    # Restrict to specific classes by listing their names, e.g.:
+    #   target_classes: ["Gawang", "Corner", "left corner", "right corner"]
+    target_classes: []
+
+    # Inference rate. ONNX at 512px on CPU runs ~80-120 ms per frame → 8-12 Hz.
+    # Keep at 10 Hz so the pipeline stays stable without over-queuing frames.
+    detection_rate: 10.0
+
+    # Publish an annotated debug image on image_out.
+    publish_image: true
+
+    # frame_id used in published headers (Webots camera link).
+    detection_frame_id: "cam_link"
+
+    enable_at_start: true

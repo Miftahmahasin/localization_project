@@ -1,0 +1,28 @@
+/**:
+  ros__parameters:
+    gaussian_blur_size: 7
+    gaussian_blur_sigma: 2.8
+    canny_edge_th: 70.0
+    hough_accum_resolution: 2.0
+    min_circle_dist: 120.0
+    hough_accum_th: 18.0
+    min_radius: 60
+    max_radius: 110
+
+    filter_h_min: 1
+    filter_h_max: 26
+    filter_s_min: 45
+    filter_s_max: 255
+    filter_v_min: 55
+    filter_v_max: 255
+
+    use_second_filter: true
+    filter2_h_min: 170
+    filter2_h_max: 179
+    filter2_s_min: 45
+    filter2_s_max: 255
+    filter2_v_min: 55
+    filter2_v_max: 255
+
+    ellipse_size: 7
+    filter_debug: true

@@ -1,0 +1,42 @@
+# Parameters for the YOLO landmark detector in Webots simulation (OpenVINO backend).
+#
+# OpenVINO runs on Intel CPU and is typically 2-3× faster than plain ONNX
+# on Intel machines (Ryzen/Core i-series with AVX2 support).
+#
+# Export the model once if field8n_openvino_model/ does not yet exist:
+#   cd <share>/model
+#   yolo export model=field8n.pt format=openvino imgsz=512
+#   # → creates field8n_openvino_model/  (field8n.xml, field8n.bin, metadata.yaml)
+#
+# Webots camera: /robotis_op3/camera/image_raw  (raw BGRA8, NOT compressed).
+/**:
+  ros__parameters:
+    # OpenVINO model DIRECTORY (contains .xml + .bin + metadata.yaml).
+    model_path: "model/field8n_openvino_model"
+
+    model_task: "detect"
+
+    # Webots uses raw Image, not CompressedImage.
+    use_compressed: false
+
+    confidence_threshold: 0.40
+    iou_threshold: 0.45
+
+    # Match the imgsz used at export time.
+    imgsz: 512
+
+    # OpenVINO always runs on "cpu". half=false (precision is fixed at export).
+    device: "cpu"
+    half: false
+    max_detections: 20
+
+    # Empty = detect ALL 8 landmark classes.
+    target_classes: []
+
+    # OpenVINO at 512px typically runs 30-50 ms → 20-30 Hz feasible.
+    # Use 20 Hz as a conservative default that stays well inside budget.
+    detection_rate: 20.0
+
+    publish_image: true
+    detection_frame_id: "cam_link"
+    enable_at_start: true

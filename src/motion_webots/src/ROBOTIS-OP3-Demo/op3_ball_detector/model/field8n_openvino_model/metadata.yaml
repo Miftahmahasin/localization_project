@@ -1,0 +1,31 @@
+description: Ultralytics field8n model trained on /content/Lapangan-2/data.yaml
+author: Ultralytics
+date: '2026-07-15T23:58:44.922219'
+version: 8.4.96
+license: AGPL-3.0 License (https://ultralytics.com/license)
+docs: https://docs.ultralytics.com
+stride: 32
+task: detect
+head: Detect
+batch: 1
+imgsz:
+- 512
+- 512
+names:
+  0: Corner
+  1: Gawang
+  2: Kotak Penalti
+  3: bola
+  4: left corner
+  5: right corner
+  6: titik penalti
+  7: titik tengah
+args:
+  data: null
+  batch: 1
+  fraction: 1.0
+  quantize: null
+  dynamic: false
+  nms: false
+channels: 3
+end2end: false

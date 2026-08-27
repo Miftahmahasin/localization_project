@@ -1,0 +1,139 @@
+### ekf_soccer_landmark.yaml  [TAHAP 4.1 — NO body-odometry baseline]
+###
+### The geometric-landmark stack. Body odometry (walking_param_odom) is a gait
+### command-echo, blind to slip/collision/lifting — DROPPED entirely (plan 4.0).
+### Between landmark fixes the filter COASTS on its process model only (quasi-
+### static; Q scaled from the OP3 physical speed limit ~0.20 m/s), NOT on odom.
+###
+### Inputs:
+###   pose2 = /landmark_pose  — PRIMARY. Geometric CLAP/ILM fix (x,y,yaw) from
+###           geometric_pose_node; single-corner frames arrive as (x,y) with a
+###           huge yaw variance so only position is taken.
+###   pose0 = /amcl_pose       — AUXILIARY line-scan (kept, plan rule #5).
+###   pose1 = /cox_pose        — AUXILIARY line-scan registration (x,y).
+### EKF owns the map->odom TF (publish_tf: true); AMCL must run tf_broadcast:=False.
+### This file is SEPARATE from ekf_soccer.yaml so the v10-v14 baselines (incl.
+### v10.17 = 0.336 m, the TAHAP 8 comparison) stay byte-for-byte intact.
+ekf_filter_node:
+  ros__parameters:
+    map_frame:       map
+    odom_frame:      odom
+    base_link_frame: base_link
+    world_frame:     map
+    frequency:         10.0
+    two_d_mode:        true
+    publish_tf:        true
+    print_diagnostics: false
+    smooth_lagged_data: true
+    history_length:     0.5
+
+    # NO odom0 — body odometry is not used (plan 4.0/4.1).
+
+    # pose2 — PRIMARY geometric landmark fix (x, y, yaw)
+    pose2: /landmark_pose
+    pose2_config: [true, true, false, false, false, true, false, false, false, false, false, false, false, false, false]
+    pose2_differential: false
+    pose2_relative:     false
+    pose2_queue_size:   5
+    # Moderate gate. NOTE: the no-odom STATIC-RUNAWAY (8b kr_run4/kr_run5: robot
+    # falls -> EKF coasts on stale walking-velocity -> ran to 8 m, then 48 m) is NOT
+    # fixed by loosening this gate (tried 25.0 -> kr_run5 diverged to 48 m: a tight-
+    # cov fast-drifting EKF makes any fix high-sigma regardless). The real lever is
+    # the VELOCITY process noise below (dropped so the filter is near-constant-
+    # position and cannot coast far without odometry). 8.0 keeps the gate lenient
+    # enough to re-anchor small drifts while not blindly embracing a wild outlier.
+    pose2_pose_rejection_threshold: 8.0
+
+    # pose0 — AUXILIARY line-scan AMCL (x, y, yaw)
+    pose0: /amcl_pose
+    pose0_config: [true, true, false, false, false, true, false, false, false, false, false, false, false, false, false]
+    pose0_differential: false
+    pose0_relative:     false
+    pose0_queue_size:   2
+    pose0_pose_rejection_threshold: 2.5
+
+    # pose1 — AUXILIARY line-scan registration (x, y)
+    pose1: /cox_pose
+    pose1_config: [true, true, false, false, false, false, false, false, false, false, false, false, false, false, false]
+    pose1_differential: false
+    pose1_relative:     false
+    pose1_queue_size:   5
+    pose1_pose_rejection_threshold: 2.0
+
+    # pose3 — TAHAP 6B line-scan CO-PRIMARY: field-line HEADING (yaw only).
+    # line_heading_node turns near-field lines into an absolute heading (mod 90
+    # resolved by the EKF prior, suppressed when ambiguous) — the down-gaze
+    # signal the typed-landmark path lacks. NOT AMCL (rule #3). Silent unless
+    # the node runs (use_line_heading:=true), so harmless otherwise.
+    pose3: /line_heading
+    pose3_config: [false, false, false, false, false, true, false, false, false, false, false, false, false, false, false]
+    pose3_differential: false
+    pose3_relative:     false
+    pose3_queue_size:   5
+    pose3_pose_rejection_threshold: 1.2
+
+    # twist0 — TAHAP C3 vision-only ZUPT (zero-velocity pseudo-measurement).
+    # geometric_pose_node publishes a ZERO TwistWithCovarianceStamped on every frame
+    # it does NOT publish a fresh /landmark_pose fix (mirror 'hold'/'lost', no obs) and
+    # whenever the gait command is 'stop'. Without odom the EKF otherwise coasts on the
+    # last pose-inferred velocity; after a kidnap teleport that phantom velocity ran the
+    # filter -2.4 m -> +16 m (kr_run2). This input pins vx,vy,vyaw ~0 so the EKF HOLDS
+    # the last good pose (bounded ~fix-error) instead of running away — which is what
+    # lets the velocity process noise below be restored to a responsive value without
+    # the runaway coming back. It is NOT IMU/odom: the trigger is fix-validity + the
+    # gait command, both vision-side. Selects vx, vy, vyaw only.
+    twist0: /zupt
+    twist0_config: [false, false, false, false, false, false, true, true, false, false, false, true, false, false, false]
+    twist0_differential: false
+    twist0_relative:     false
+    twist0_queue_size:   10
+
+    # Process noise. NO odom + a velocity sensor absent, so the velocity states are
+    # only ever INFERRED from pose deltas — and a stale velocity is what runs the
+    # filter away when no fresh fix arrives (a fall, or the mirror suppressing a fix).
+    # TAHAP C3: rather than starve velocity via TINY Q (vx,vy 0.0008 — which stopped the
+    # static-runaway but made the filter sluggish and, crucially, could NOT DAMP a
+    # velocity injected by a kidnap teleport: kr_run2 still ran to 16 m), the velocity Q
+    # is RESTORED to a responsive value (vx,vy 0.02; vyaw 0.01) and the runaway is now
+    # stopped structurally by the twist0 ZUPT above — a zero-velocity pseudo-measurement
+    # published on every coast frame that pins velocity to ~0 so the EKF holds the last
+    # pose. Q generous enough to track the proven 0.208 m walk and to re-acquire after a
+    # blackout; the ZUPT (not tiny Q) is what prevents the coast->runaway.
+    process_noise_covariance: [
+      0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+      0.0,0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+      0.0,0.0,0.001,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+      0.0,0.0,0.0,0.001,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+      0.0,0.0,0.0,0.0,0.001,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+      0.0,0.0,0.0,0.0,0.0,0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+      0.0,0.0,0.0,0.0,0.0,0.0,0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+      0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.02,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+      0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.02,0.0,0.0,0.0,0.0,0.0,0.0,
+      0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.001,0.0,0.0,0.0,0.0,0.0,
+      0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.001,0.0,0.0,0.0,0.0,
+      0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.01,0.0,0.0,0.0,
+      0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.001,0.0,0.0,
+      0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.001,0.0,
+      0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.001
+    ]
+
+    # Start GLOBALLY uncertain (5 m / pi) so the first landmark fix sets the pose
+    # and the no-teleport gate does not fire during initial relocalization.
+    initial_state: [0.0, 0.0, 0.0,  0.0, 0.0, 0.0,  0.0, 0.0, 0.0,  0.0, 0.0, 0.0,  0.0, 0.0, 0.0]
+    initial_estimate_covariance: [
+      25.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+      0.0,25.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+      0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+      0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+      0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+      0.0,0.0,0.0,0.0,0.0,9.87,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+      0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+      0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,
+      0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,0.0,
+      0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,0.0,
+      0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,0.0,
+      0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,0.0,
+      0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,0.0,
+      0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,0.0,
+      0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0
+    ]

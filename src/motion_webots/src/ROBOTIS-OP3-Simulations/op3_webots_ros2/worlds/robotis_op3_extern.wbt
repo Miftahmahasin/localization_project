@@ -1,0 +1,61 @@
+#VRML_SIM R2023b utf8
+
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackground.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2023a/projects/objects/backgrounds/protos/TexturedBackgroundLight.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/objects/balls/protos/Ball.proto"
+EXTERNPROTO "https://raw.githubusercontent.com/cyberbotics/webots/R2025a/projects/samples/contests/robocup/protos/RobocupSoccerField.proto"
+EXTERNPROTO "../protos/RobotisOp3.proto"
+
+WorldInfo {
+  info [
+    "ROBOTIS OP3 robot."
+    "The ROBOTIS OP3 robot simulation model can be programmed using the ROBOTIS OP3 motions files."
+  ]
+  title "ROBOTIS OP3"
+  basicTimeStep 8
+}
+Viewpoint {
+  orientation -0.21330010458045784 0.2113459390792094 0.953853216915838 1.6272156543704595
+  position 0.562239037741489 -2.447558055557704 1.3939835768954514
+  follow "ROBOTIS OP3"
+}
+DEF DR_BG TexturedBackground {
+  skybox FALSE
+  skyColor [
+    0.0 0.0 0.0
+  ]
+}
+DEF DR_AMBIENT TexturedBackgroundLight {
+}
+# Controllable directional light for sim-to-real domain randomization. Off by
+# default (intensity 0), so the baseline scene is unchanged; the supervisor
+# controller drives its intensity/color/direction via /robotis_op3/set_lighting.
+DEF DR_LIGHT DirectionalLight {
+  color 1 1 1
+  direction 0.3 -0.4 -1
+  intensity 0
+  castShadows TRUE
+}
+RobocupSoccerField {
+  size "kid"
+  turfPhysics FALSE
+}
+DEF BALL Ball {
+  translation 0 0 0.03
+  rotation 1 0 0 1.5707963267948966
+}
+RobotisOp3 {
+  translation -0.36 0 0.3
+  rotation 0 1 0 0.09
+  controller "<extern>"
+  supervisor TRUE
+  cameraWidth 1920
+  cameraHeight 1080
+  bodySlot [
+    InertialUnit {
+    }
+  ]
+
+
+}
+

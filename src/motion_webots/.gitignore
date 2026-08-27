@@ -1,0 +1,85 @@
+# =========================================
+# ROS 2 specific ignores (colcon build system)
+# =========================================
+# Ignore colcon build directories.
+# These are the results of compilation and linking and are system-specific.
+build/
+install/
+log/
+
+# =========================================
+# Standard build and temporary files
+# =========================================
+# Object files
+*.o
+*.lo
+*.la
+*.dlo
+*.obj
+
+# Libraries
+*.lib
+*.a
+*.so
+*.dylib
+*.dll
+
+# Executables (usually generated in build/install, but including for completeness)
+# Be cautious with this if you have source files *without* extensions that are
+# meant to be tracked.
+*.exe
+# no extension executables - ignore binaries inside build/install
+# This is usually handled by ignoring the directories above, but a fallback:
+# /build/*/
+# /install/*/
+# If you have *source* files without extensions you need to track, remove this.
+# *
+
+# Compiled Python files
+__pycache__/
+*.pyc
+
+# SCons build files
+.sconf_temp/
+
+# =========================================
+# Editor and IDE temporary files
+# =========================================
+# Backup files from various editors
+*~
+#*#
+
+# Swap files
+*.swp
+*.swo
+
+# Lock files
+.#*
+
+# VS Code
+.vscode/
+
+# IntelliJ/CLion/PyCharm etc.
+.idea/
+
+# Emacs temporary files
+\#*#
+
+# Kite AI (autocompletion tool) - can create large indexes
+.kite/
+
+# =========================================
+# Operating System generated files
+# =========================================
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# =========================================
+# Miscellaneous
+# =========================================
+# Files created by patching/merging
+*.orig
+*.rej
